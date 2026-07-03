@@ -406,7 +406,7 @@ function showAddGalleryModal() {
   document.getElementById('newGalFit').value = 'contain';
   document.getElementById('galPreviewImg').style.display = 'none';
   document.getElementById('galPreviewText').style.display = 'block';
-  document.getElementById('galleryModal').classList.add('active');
+  document.getElementById('galleryModal').style.display = 'flex';
 }
 
 function editGalleryItem(id) {
@@ -423,11 +423,11 @@ function editGalleryItem(id) {
   document.getElementById('galleryModalTitle').textContent = 'Редагувати фотозвіт';
 
   updateGalPreview();
-  document.getElementById('galleryModal').classList.add('active');
+  document.getElementById('galleryModal').style.display = 'flex';
 }
 
 function closeGalModal() {
-  document.getElementById('galleryModal').classList.remove('active');
+  document.getElementById('galleryModal').style.display = 'none';
 }
 
 function deleteGallery(id) {

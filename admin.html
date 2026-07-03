@@ -336,8 +336,8 @@
   </div>
 
   <!-- Modal: Gallery Item -->
-  <div class="admin-modal" id="galleryModal">
-    <div class="admin-modal-box">
+  <div id="galleryModal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 4000; padding: 20px;">
+    <div style="background: #0f1c3f; padding: 32px; border-radius: 20px; width: 95%; max-width: 600px; border: 1px solid var(--admin-border); max-height: 90vh; overflow-y: auto;">
       <h2 style="margin-bottom: 16px; font-size: 1.3rem;" id="galleryModalTitle">Додати фотозвіт</h2>
       <form id="galleryForm" onsubmit="saveGalleryItem(event)">
         <input type="hidden" id="editGalId">
