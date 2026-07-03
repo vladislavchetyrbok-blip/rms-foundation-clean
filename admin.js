@@ -490,3 +490,54 @@ function saveGalleryItem(event) {
   closeGalModal();
   renderAllAdmin();
 }
+
+async function handleBulkGalleryUpload(event) {
+  const files = Array.from(event.target.files);
+  if (!files || files.length === 0) return;
+
+  const total = files.length;
+  const modal = document.getElementById('bulkProgressModal');
+  const textEl = document.getElementById('bulkProgressText');
+  const barEl = document.getElementById('bulkProgressBar');
+
+  if (modal) modal.style.display = 'flex';
+  if (textEl) textEl.textContent = `Обробка 0 з ${total} фото...`;
+  if (barEl) barEl.style.width = '0%';
+
+  const data = FoundationStore.getData();
+  if (!data.gallery) data.gallery = [];
+
+  let processed = 0;
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    let cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' ');
+    if (cleanName.length > 35 || /^(IMG|DSC|PXL|Screenshot|photo|image|\d)/i.test(cleanName)) {
+      cleanName = 'Робота та допомога фонду';
+    }
+
+    await new Promise((resolve) => {
+      compressImageFile(file, 700, 700, 0.7, function(base64) {
+        data.gallery.unshift({
+          id: 'gal_' + Date.now() + '_' + i + '_' + Math.floor(Math.random()*10000),
+          title: cleanName,
+          category: '⚡ Допомога',
+          desc: '',
+          image: base64,
+          imagePos: 'center center',
+          imageFit: 'contain'
+        });
+        processed++;
+        if (textEl) textEl.textContent = `Обробка ${processed} з ${total} фото...`;
+        if (barEl) barEl.style.width = `${Math.round((processed / total) * 100)}%`;
+        setTimeout(resolve, 30);
+      });
+    });
+  }
+
+  FoundationStore.saveData(data);
+  if (modal) modal.style.display = 'none';
+  event.target.value = '';
+  renderAllAdmin();
+  alert(`🚀 Успішно завантажено та оптимізовано ${processed} фотографій! Вони вже на сайті.`);
+}
