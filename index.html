@@ -23,6 +23,7 @@
           <li><a href="#calc" data-i18n="nav_calc">Калькулятор донату</a></li>
           <li><a href="#campaigns" data-i18n="nav_campaigns">Активні збори</a></li>
           <li><a href="#news" data-i18n="nav_news">Звіти з фронту</a></li>
+          <li><a href="#gallery" style="color: var(--accent-gold); font-weight: 700;">📸 Фотозвіт справ</a></li>
           <li><a href="#honor" data-i18n="nav_honor">Дошка пошани</a></li>
           <li><a href="#focus" data-i18n="nav_focus">Напрямки</a></li>
           <li><a href="#contact" data-i18n="nav_contact">Контакти</a></li>
@@ -193,6 +194,74 @@
 
       <div class="news-grid" id="newsContainer">
         <!-- Dynamically Rendered by script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery / Work Reports -->
+  <section class="section" id="gallery" style="background: rgba(15,28,63,0.4); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header">
+        <div class="badge" style="margin: 0 auto 12px; background: rgba(255,183,3,0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold);">📸 ЖИВА ХРОНІКА ДОПОМОГИ</div>
+        <h2 class="section-title">Реальні справи нашого фонду</h2>
+        <p class="section-subtitle">Щоденна праця наших волонтерів у лікарнях, реабілітаційних центрах, прифронтових громадах та на гуманітарних складах.</p>
+      </div>
+
+      <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 36px;">
+        <div class="gallery-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.3s;">
+          <div style="height: 240px; overflow: hidden; position: relative;">
+            <img src="work_medical_aid.jpg" alt="Медична допомога лікарням" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
+            <span style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); color: #fff; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">🏥 Медицина</span>
+          </div>
+          <div style="padding: 18px;">
+            <h3 style="font-size: 1.15rem; font-family: var(--font-heading); margin-bottom: 8px; color: #fff;">Підтримка медичних закладів</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Передача гуманітарних вантажів, медикаментів та засобів догляду (спільно з Nova Ukraine / Sorgesana) для пацієнтів психо-неврологічних диспансерів та лікарень.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.3s;">
+          <div style="height: 240px; overflow: hidden; position: relative;">
+            <img src="work_baby_food.jpg" alt="Гуманітарні склади" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
+            <span style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); color: #fff; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">📦 Логістика</span>
+          </div>
+          <div style="padding: 18px;">
+            <h3 style="font-size: 1.15rem; font-family: var(--font-heading); margin-bottom: 8px; color: #fff;">Тонни дитячого харчування</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Сотні палет високоякісного дитячого харчування HiPP та базових продуктів для малюків із сімей внутрішньо переміщених осіб.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.3s;">
+          <div style="height: 240px; overflow: hidden; position: relative;">
+            <img src="work_rehab_chairs.jpg" alt="Реабілітаційні засоби" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
+            <span style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); color: #fff; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">🦽 Реабілітація</span>
+          </div>
+          <div style="padding: 18px;">
+            <h3 style="font-size: 1.15rem; font-family: var(--font-heading); margin-bottom: 8px; color: #fff;">Засоби пересування та догляду</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Спеціалізовані крісла колісні, ходунки та медичне обладнання для поранених військовослужбовців та пацієнтів реабілітаційних відділень.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.3s;">
+          <div style="height: 240px; overflow: hidden; position: relative;">
+            <img src="work_hospital_ward.jpg" alt="Оснащення шпиталів" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
+            <span style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); color: #fff; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">🛏️ Стаціонари</span>
+          </div>
+          <div style="padding: 18px;">
+            <h3 style="font-size: 1.15rem; font-family: var(--font-heading); margin-bottom: 8px; color: #fff;">Оснащення лікарняних палат</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Підтримка належних санітарних та побутових умов у шпиталях для швидкого фізичного та морального відновлення наших Героїв.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.3s;">
+          <div style="height: 240px; overflow: hidden; position: relative;">
+            <img src="work_kids_toys.jpg" alt="Допомога дітям" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
+            <span style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); color: #fff; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">🧸 Діти та родини</span>
+          </div>
+          <div style="padding: 18px;">
+            <h3 style="font-size: 1.15rem; font-family: var(--font-heading); margin-bottom: 8px; color: #fff;">Турбота про дітей та переселенців</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Іграшки, розвиваючі ігри, подарунки та сувеніри для дітей, чиї родини були змушені покинути свої домівки через військові дії.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -473,6 +542,7 @@
         <li><a href="#calc" onclick="closeMobileMenu()" data-i18n="nav_calc">Калькулятор донату</a></li>
         <li><a href="#campaigns" onclick="closeMobileMenu()" data-i18n="nav_campaigns">Активні збори</a></li>
         <li><a href="#news" onclick="closeMobileMenu()" data-i18n="nav_news">Звіти з фронту</a></li>
+        <li><a href="#gallery" onclick="closeMobileMenu()" style="color: var(--accent-gold); font-weight: 700;">📸 Фотозвіт справ</a></li>
         <li><a href="#honor" onclick="closeMobileMenu()" data-i18n="nav_honor">Дошка пошани</a></li>
         <li><a href="#focus" onclick="closeMobileMenu()" data-i18n="nav_focus">Напрямки</a></li>
         <li><a href="#contact" onclick="closeMobileMenu()" data-i18n="nav_contact">Контакти</a></li>

@@ -1359,4 +1359,14 @@ html, body {
   }
 }
 
+/* Gallery Card Animations */
+.gallery-card:hover {
+  transform: translateY(-8px);
+  border-color: #0088cc !important;
+  box-shadow: 0 16px 40px rgba(0, 136, 204, 0.25) !important;
+}
+.gallery-card:hover img {
+  transform: scale(1.08);
+}
+
 
