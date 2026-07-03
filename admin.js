@@ -517,7 +517,7 @@ async function handleBulkGalleryUpload(event) {
     }
 
     await new Promise((resolve) => {
-      compressImageFile(file, 700, 700, 0.7, function(base64) {
+      compressImageFile(file, 550, 550, 0.62, function(base64) {
         data.gallery.unshift({
           id: 'gal_' + Date.now() + '_' + i + '_' + Math.floor(Math.random()*10000),
           title: cleanName,

@@ -273,6 +273,7 @@ window.FoundationStore = {
 
   saveData(data, skipCloud = false) {
     try {
+      data.lastModified = Date.now();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       window.dispatchEvent(new CustomEvent('foundation_data_changed'));
     } catch (e) {
@@ -287,8 +288,14 @@ window.FoundationStore = {
           'X-Master-Key': ONLINE_API_KEY
         },
         body: JSON.stringify(data)
-      }).then(() => console.log('🌐 Дані успішно збережено в онлайн-хмару JSONBin!'))
-        .catch(err => console.error('Помилка запису в хмару:', err));
+      }).then(async r => {
+        if (!r.ok) {
+          const errText = await r.text().catch(() => '');
+          console.error('Помилка запису в хмару JSONBin (статус ' + r.status + '):', errText);
+        } else {
+          console.log('🌐 Дані успішно збережено в онлайн-хмару JSONBin!');
+        }
+      }).catch(err => console.error('Помилка запису в хмару:', err));
     }
   },
 
@@ -302,6 +309,16 @@ window.FoundationStore = {
     .then(r => r.json())
     .then(res => {
       if (res && res.record && res.record.stats) {
+        const localRaw = localStorage.getItem(STORAGE_KEY);
+        let localData = null;
+        try { if (localRaw) localData = JSON.parse(localRaw); } catch(e){}
+
+        if (localData && localData.lastModified && (!res.record.lastModified || localData.lastModified > res.record.lastModified)) {
+          console.log('⚡ Локальні дані новіші за хмару. Синхронізуємо хмару...');
+          this.saveData(localData);
+          return;
+        }
+
         localStorage.setItem(STORAGE_KEY, JSON.stringify(res.record));
         window.dispatchEvent(new CustomEvent('foundation_data_changed'));
         console.log('🌐 Актуальні онлайн-дані успішно завантажено з хмари!');

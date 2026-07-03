@@ -1286,6 +1286,7 @@ html, body {
   
   /* Fix All Multi-column Grids on Mobile */
   .campaigns-grid,
+  .gallery-grid,
   .focus-grid,
   .news-grid,
   .form-grid,
