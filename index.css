@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:ital,wght@0,300..800;1,300..800&family=Outfit:wght@400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
   --bg-primary: #070e1e;
@@ -17,6 +17,8 @@
   
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-cursive: 'Playfair Display', 'Cormorant Garamond', serif;
+  --font-italic: 'Inter', sans-serif;
   
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -30,9 +32,10 @@
 
 body {
   background-color: var(--bg-primary);
-  color: var(--text-main);
+  color: #f1f5f9;
   font-family: var(--font-body);
-  line-height: 1.6;
+  line-height: 1.68;
+  letter-spacing: 0.01em;
   overflow-x: hidden;
   position: relative;
 }
@@ -2037,4 +2040,91 @@ html, body {
   background: rgba(0, 212, 255, 0.25);
   border-color: var(--accent-gold);
   transform: translateX(4px);
+}
+
+
+/* ==========================================================================
+   ✨ ULTIMATE SYSTEM POLISH & SLEEK CURSIVE / EDITORIAL TYPOGRAPHY ✨
+   "Полируй все и стиль сделай курсивый чтоб было удобно смотреть"
+   ========================================================================== */
+
+/* Sleek Cursive & Italic Subtitles across all pages */
+.section-subtitle, .hero-subtitle, p.subtitle {
+  font-family: var(--font-italic), sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #cbd5e1 !important;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Luxury Cursive Titles & Highlights */
+.cursive-title, .cursive-highlight {
+  font-family: var(--font-cursive);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 20px rgba(255, 183, 3, 0.45);
+}
+
+/* Editorial Magazine Quote Boxes */
+.editorial-quote {
+  font-family: var(--font-cursive);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: #fff;
+  border-left: 4px solid var(--accent-gold);
+  padding: 16px 24px;
+  margin: 24px 0;
+  background: linear-gradient(90deg, rgba(255, 183, 3, 0.1), transparent);
+  border-radius: 0 16px 16px 0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Sleek Glass Cards Polish */
+.sleek-card, .card, .panel, .admin-card, .faq-item, .hotline-card {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.sleek-card:hover, .card:hover, .panel:hover, .admin-card:hover, .faq-item:hover, .hotline-card:hover {
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(255, 183, 3, 0.15) !important;
+  transform: translateY(-4px);
+}
+
+/* Badges sleek italic polish */
+.badge {
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Comfortable Reading Typography for Lists and Descriptions */
+p, li, td, th {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Smooth custom scrollbar for comfortable viewing */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #070e1e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 5px;
+  border: 2px solid #070e1e;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
 }
