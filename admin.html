@@ -63,6 +63,7 @@
           <li class="nav-item" onclick="switchSection('b2b', this)">🤝 B2B-Партнери та КСВ</li>
           <li class="nav-item" onclick="switchSection('podcasts', this)">🎧 Подкасти та Радіо</li>
           <li class="nav-item" onclick="switchSection('support', this)">💬 Live-Чат Підтримки</li>
+          <li class="nav-item" onclick="switchSection('dronehub', this)">🛠️ Інженерний Хаб (Збірка)</li>
         </ul>
       </div>
 
@@ -869,6 +870,35 @@
                 </tr>
               </thead>
               <tbody id="supportTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 23: Drone Hub (DIY Assembly & Testing) -->
+      <section id="sec-dronehub" style="display: none;">
+        <div class="topbar">
+          <h1 class="page-title">🛠️ Управління Інженерним Хабом «Сталеві Крила»</h1>
+          <div style="color: #60a5fa; font-weight: 700;">● Народна збірка FPV та РЕБ • Полігонний контроль</div>
+        </div>
+
+        <div class="admin-card">
+          <h2 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">🛸 Зареєстровані на полігон вироби від волонтерів-майстрів</h2>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID / Дата</th>
+                  <th>Майстер (Автор)</th>
+                  <th>Контакти</th>
+                  <th>Тип виробу</th>
+                  <th>Серійний номер</th>
+                  <th>Примітки інженера</th>
+                  <th>Статус полігону</th>
+                  <th>Дії</th>
+                </tr>
+              </thead>
+              <tbody id="droneHubTableBody"></tbody>
             </table>
           </div>
         </div>

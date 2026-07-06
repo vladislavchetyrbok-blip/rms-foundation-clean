@@ -537,6 +537,15 @@ const INITIAL_DATA = {
     { id: 'faq_2', q: '⚔️ Як військовослужбовцю подати офіційний запит на дрони або РЕБ?', a: 'Перейдіть у розділ «⚔️ Запити ЗСУ» та заповніть форму. Необхідно вказати номер ВЧ, ПІБ командира, телефон та додати скан-копію офіційного листа-запиту з печаткою.' },
     { id: 'faq_3', q: '🤝 Які податкові пільги отримує бізнес за B2B-партнерство?', a: 'Благодійний фонд «Разом ми — сила» включено до Реєстру неприбуткових організацій (ознака 0036). Юридичні особи можуть включати благодійні внески до витрат згідно з ПКУ.' },
     { id: 'faq_4', q: '🌍 Як зробити внесок з-за кордону у USD або EUR?', a: 'На сторінці «🤝 Долучитися / Донат» доступні міжнародні реквізити IBAN (USD/EUR/GBP), PayPal, Stripe, Apple Pay та криптовалютні гаманці (USDT, BTC, ETH).' }
+  ],
+  droneSubmissions: [
+    { id: 'DRN-101', author: 'Богдан (Інженер-волонтер)', contact: '+380971112233', kitType: '7-дюймовий FPV-камікадзе', serialNum: 'RMS-FPV-7042', status: 'approved', statusLabel: '🟢 Пройшов полігон (Відправлено 93-й ОМБр)', date: '06.07.2026', notes: 'Прошивка Betaflight 4.4, VTX 1.6W, відео чисте' },
+    { id: 'DRN-102', author: 'Олександр (Київський Хаб)', contact: 'alex_fpv@gmail.com', kitType: 'Окопний РЕБ "Купол-3"', serialNum: 'RMS-REB-3019', status: 'testing', statusLabel: '🟡 На полігонному тестуванні', date: '05.07.2026', notes: '3 діапазони: 700-1000 МГц, охолодження активне' }
+  ],
+  droneKits: [
+    { id: 'KIT-1', name: '7-дюймовий ударний FPV-камікадзе (Day/Night)', price: 12500, desc: 'Повний комплект деталей для збірки: карбонова рама Mark4, мотори 2806.5, стек F405 55A, камера Caddx Ratel 2, VTX Rush Solo 1.6W, антена Rush Cherry, пропелери.', ordersCount: 420 },
+    { id: 'KIT-2', name: '10-дюймовий важкий бомбер-бомбовоз (Під скиди 2.5 кг)', price: 18900, desc: 'Посилена рама 10", мотори 3115 900KV, стек F722 65A, камера Night Eagle 3, далекобійний VTX 2.5W, система кріплення та скиду боєприпасів.', ordersCount: 185 },
+    { id: 'KIT-3', name: 'Окопна станція РЕБ "Купол-3" (3 діапазони)', price: 24500, desc: 'Набір для збірки мобільного РЕБ: генератори перешкод (700-860, 860-1020, 2400 МГц), радіатори охолодження, кулери, антени конюшина, захисний кейс, АКБ 24V.', ordersCount: 140 }
   ]
 };
 window.FoundationStore = {
@@ -1189,6 +1198,48 @@ window.FoundationStore = {
     const data = this.getData();
     data.applications = data.applications?.filter(a => a.id !== id) || [];
     this.saveData(data);
+  },
+
+  getDroneSubmissions() {
+    return this.getData().droneSubmissions || [];
+  },
+
+  getDroneKits() {
+    return this.getData().droneKits || [];
+  },
+
+  addDroneSubmission(author, contact, kitType, serialNum, notes) {
+    const data = this.getData();
+    if (!data.droneSubmissions) data.droneSubmissions = [];
+    const id = 'DRN-' + Math.floor(100 + Math.random() * 900);
+    const today = new Date().toLocaleDateString('uk-UA');
+    data.droneSubmissions.unshift({
+      id, author, contact, kitType, serialNum: serialNum || ('RMS-DIY-' + Math.floor(1000 + Math.random()*9000)),
+      status: 'testing', statusLabel: '🟡 На полігонному тестуванні', date: today, notes
+    });
+    this.saveData(data);
+    return id;
+  },
+
+  updateDroneStatus(id, status) {
+    const data = this.getData();
+    if (!data.droneSubmissions) return;
+    const item = data.droneSubmissions.find(d => d.id === id);
+    if (item) {
+      item.status = status;
+      if (status === 'approved') item.statusLabel = '🟢 Пройшов полігон (Відправлено у ВЧ)';
+      else if (status === 'testing') item.statusLabel = '🟡 На полігонному тестуванні';
+      else if (status === 'rejected') item.statusLabel = '🔴 Не пройшов тест (На доопрацюванні)';
+      this.saveData(data);
+    }
+  },
+
+  deleteDroneSubmission(id) {
+    const data = this.getData();
+    if (data.droneSubmissions) {
+      data.droneSubmissions = data.droneSubmissions.filter(d => d.id !== id);
+      this.saveData(data);
+    }
   }
 };
 

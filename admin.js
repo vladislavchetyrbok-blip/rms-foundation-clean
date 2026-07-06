@@ -63,6 +63,7 @@ function switchSection(sec, btnEl) {
   if (document.getElementById('sec-b2b')) document.getElementById('sec-b2b').style.display = sec === 'b2b' ? 'block' : 'none';
   if (document.getElementById('sec-podcasts')) document.getElementById('sec-podcasts').style.display = sec === 'podcasts' ? 'block' : 'none';
   if (document.getElementById('sec-support')) document.getElementById('sec-support').style.display = sec === 'support' ? 'block' : 'none';
+  if (document.getElementById('sec-dronehub')) document.getElementById('sec-dronehub').style.display = sec === 'dronehub' ? 'block' : 'none';
 
   renderAllAdmin();
 }
@@ -89,6 +90,7 @@ function renderAllAdmin() {
   if (typeof renderAdminB2b === 'function') renderAdminB2b();
   if (typeof renderAdminPodcasts === 'function') renderAdminPodcasts();
   if (typeof renderAdminSupport === 'function') renderAdminSupport();
+  if (typeof renderAdminDroneHub === 'function') renderAdminDroneHub();
 }
 
 // === Section 1: Stats ===
@@ -1554,3 +1556,55 @@ function deleteAdminSupportMsg(id) {
     renderAdminSupport();
   }
 }
+
+// === Section 23: Drone Hub CRM ===
+function renderAdminDroneHub() {
+  const body = document.getElementById('droneHubTableBody');
+  if (!body || !window.FoundationStore) return;
+
+  const list = FoundationStore.getDroneSubmissions ? FoundationStore.getDroneSubmissions() : [];
+
+  if (list.length === 0) {
+    body.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px; color: #888;">Зареєстрованих на полігон виробів поки немає</td></tr>';
+  } else {
+    body.innerHTML = list.map(item => `
+      <tr>
+        <td><strong style="color: var(--accent-gold);">${item.id}</strong><br><small style="color: #888;">${item.date}</small></td>
+        <td style="font-weight: 700; color: #fff;">${item.author}</td>
+        <td><span style="color: #60a5fa;">${item.contact}</span></td>
+        <td style="font-weight: 700; color: #ffb703;">${item.kitType}</td>
+        <td style="font-family: monospace; color: #fff; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 6px;">${item.serialNum}</td>
+        <td style="font-size: 0.9rem; color: #ccc; max-width: 220px;">${item.notes || '—'}</td>
+        <td>
+          <span style="background: ${item.status === 'approved' ? 'rgba(16,185,129,0.2)' : (item.status === 'testing' ? 'rgba(245,158,11,0.2)' : 'rgba(239,68,68,0.2)')}; color: ${item.status === 'approved' ? '#10b981' : (item.status === 'testing' ? '#f59e0b' : '#ef4444')}; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 700;">${item.statusLabel}</span>
+        </td>
+        <td>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            ${item.status !== 'approved' ? `<button class="btn-admin btn-add" style="padding: 4px 8px; font-size: 0.75rem;" onclick="updateAdminDroneStatus('${item.id}', 'approved')">🟢 Пройшов</button>` : ''}
+            ${item.status !== 'testing' ? `<button class="btn-admin" style="padding: 4px 8px; font-size: 0.75rem; background: rgba(245,158,11,0.2); color: #f59e0b; border: 1px solid #f59e0b;" onclick="updateAdminDroneStatus('${item.id}', 'testing')">🟡 На полігон</button>` : ''}
+            ${item.status !== 'rejected' ? `<button class="btn-admin btn-del" style="padding: 4px 8px; font-size: 0.75rem;" onclick="updateAdminDroneStatus('${item.id}', 'rejected')">🔴 Відхилити</button>` : ''}
+            <button class="btn-admin btn-del" style="padding: 4px 6px;" onclick="deleteAdminDroneSubmission('${item.id}')">🗑️</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+}
+
+function updateAdminDroneStatus(id, status) {
+  if (window.FoundationStore && FoundationStore.updateDroneStatus) {
+    FoundationStore.updateDroneStatus(id, status);
+    renderAdminDroneHub();
+    alert(`🎉 Статус виробу ${id} оновлено!`);
+  }
+}
+
+function deleteAdminDroneSubmission(id) {
+  if (confirm(`Видалити запис про виріб ${id}?`)) {
+    if (window.FoundationStore && FoundationStore.deleteDroneSubmission) {
+      FoundationStore.deleteDroneSubmission(id);
+      renderAdminDroneHub();
+    }
+  }
+}
+
