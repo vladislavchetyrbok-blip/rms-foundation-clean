@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Еко-Оборона та Розмінування українських земель від БФ «Разом ми — сила». Роботизоване очищення полів, відновлення лісів та аналіз ґрунтів.">
+  <title>Еко-Оборона та Розмінування Землі — БФ «Разом ми сила»</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:ital,wght@0,300..800;1,300..800&family=Outfit:wght@400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    .eco-hero {
+      background: linear-gradient(135deg, rgba(7, 14, 30, 0.95) 0%, rgba(10, 50, 25, 0.85) 100%), url('media__1783040943183.jpg') center/cover no-repeat;
+      padding: 90px 0 70px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+    .eco-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+    @media (max-width: 950px) {
+      .eco-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 650px) {
+      .eco-grid { grid-template-columns: 1fr; }
+    }
+    .eco-card {
+      background: #0f1c3f;
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 26px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .progress-bar-eco {
+      width: 100%;
+      height: 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 12px 0 6px;
+    }
+    .progress-fill-eco {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #60a5fa);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo" style="text-decoration: none;">
+        <div class="logo-icon">🇺🇦</div>
+        <span>Разом ми сила</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html#about"><span>ℹ️</span> <span>Головна</span></a></li>
+          <li><a href="index.html#campaigns"><span>🎯</span> <span>Збори</span></a></li>
+          <li><a href="gallery.html"><span>📸</span> <span>Архів справ</span></a></li>
+          <li><a href="transparency.html"><span>🛡️</span> <span>Прозорість</span></a></li>
+          <li><a href="join.html"><span>🤝</span> <span>Долучитися</span></a></li>
+          <li><a href="stories.html"><span>📖</span> <span>Історії місій</span></a></li>
+          <li><a href="military_request.html"><span>⚔️</span> <span>Військовим</span></a></li>
+          <li><a href="honor_wall.html"><span>🌟</span> <span>Зала Слави</span></a></li>
+          <li><a href="shop.html"><span>🛍️</span> <span>Мерч-Шоп</span></a></li>
+          <li><a href="training.html"><span>🎓</span> <span>Академія</span></a></li>
+          <li><a href="rehab.html"><span>🦿</span> <span>Реабілітація</span></a></li>
+          <li><a href="international.html"><span>🌍</span> <span>Global Hub</span></a></li>
+          <li><a href="memorial.html"><span>🕯️</span> <span>Пантеон</span></a></li>
+          <li><a href="auctions.html"><span>🎟️</span> <span>Аукціони</span></a></li>
+          <li><a href="battles.html"><span>⚔️</span> <span>Батли</span></a></li>
+          <li><a href="b2b.html"><span>🤝</span> <span>B2B-Партнери</span></a></li>
+          <li><a href="podcasts.html"><span>🎧</span> <span>Подкасти</span></a></li>
+          <li><a href="support.html"><span>💬</span> <span>Підтримка</span></a></li>
+          <li><a href="map.html"><span>🗺️</span> <span>Карта допомоги</span></a></li>
+          <li><a href="drone_hub.html"><span>🛠️</span> <span>Інженерний Хаб</span></a></li>
+          <li><a href="donor_hub.html"><span>🩸</span> <span>Банк Крові</span></a></li>
+          <li><a href="animals_rescue.html"><span>🐾</span> <span>Хвостаті Патрони</span></a></li>
+          <li><a href="legal_aid.html"><span>⚖️</span> <span>Юридична Опора</span></a></li>
+          <li><a href="profile.html"><span>🎮</span> <span>Кабінет Мецената</span></a></li>
+          <li><a href="eco_defense.html" style="color: #10b981; font-weight: 700;"><span>🌱</span> <span>Еко-Оборона</span></a></li>
+          <li><a href="children_future.html"><span>👧👦</span> <span>Діти Війни</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main style="min-height: 85vh; padding-bottom: 90px;">
+    <!-- Hero Banner -->
+    <section class="eco-hero">
+      <div class="container">
+        <div class="badge" style="margin: 0 auto 16px; background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; padding: 6px 18px; border-radius: 20px; font-weight: 700; display: inline-block;">
+          🌱 ВІДНОВЛЕННЯ ТА ОЧИЩЕННЯ УКРАЇНСЬКОЇ ЗЕМЛІ
+        </div>
+        <h1 class="section-title" style="font-size: 3rem; margin-bottom: 16px; color: #fff;">
+          🌱 Еко-Оборона та Розмінування
+        </h1>
+        <p class="section-subtitle">
+          «Ми закупаємо роботизовані комплексі для очищення сільськогосподарських полів від мін, відновлюємо випалені війною ліси та фінансуємо мобільні лабораторії контролю чистоти води!»
+        </p>
+      </div>
+    </section>
+
+    <!-- Eco Projects Catalog -->
+    <section style="padding: 40px 0 60px;">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h2 class="section-title">🚜 Активні Екологічні та Демонтажні Проєкти</h2>
+          <p class="section-subtitle">Кожен ваш донат повертає родючість та безпеку українським чорноземам і лісам</p>
+        </div>
+
+        <div class="eco-grid" id="ecoContainer">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Forest Rebirth Program -->
+    <section class="section" style="padding: 50px 0; background: rgba(0,0,0,0.3); border-top: 1px solid var(--border-color);">
+      <div class="container" style="text-align: center; max-width: 800px;">
+        <span style="font-size: 3rem; display: block; margin-bottom: 12px;">🌲🌳🌱</span>
+        <h2 class="section-title">Програма «Відродимо Український Ліс»</h2>
+        <p class="section-subtitle">
+          Завдяки партнерству з Державним Агентством Лісових Ресурсів, за кожні задоначені 100 ₴ ми висаджуємо 1 молодий дуб або сосну у Серебрянському лісництві чи Святогірську, де ворожа артилерія знищила гектари лісових масивів!
+        </p>
+        <button onclick="donateForest()" class="btn btn-primary" style="background: #10b981; border-color: #10b981; margin-top: 16px; padding: 16px 36px; border-radius: 16px; font-size: 1.1rem; font-weight: 800;">
+          🌱 Посадити 10 дерев (1,000 ₴)
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-container">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="text-decoration: none;">
+          <div class="logo-icon">🇺🇦</div>
+          <span>Разом ми сила</span>
+        </a>
+        <p style="color: #888; font-size: 0.9rem; margin-top: 12px;">
+          Еко-Оборона та Розмінування. Очищуємо рідну землю заради майбутніх поколінь!
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 style="color: #fff; margin-bottom: 12px;">Навігація</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+          <li><a href="index.html" style="color: #aaa; text-decoration: none;">Головна</a></li>
+          <li><a href="donor_hub.html" style="color: #aaa; text-decoration: none;">🩸 Банк Крові</a></li>
+          <li><a href="animals_rescue.html" style="color: #aaa; text-decoration: none;">🐾 Хвостаті Патрони</a></li>
+          <li><a href="legal_aid.html" style="color: #aaa; text-decoration: none;">⚖️ Юридична Опора</a></li>
+          <li><a href="profile.html" style="color: #aaa; text-decoration: none;">🎮 Кабінет Мецената</a></li>
+          <li><a href="eco_defense.html" style="color: #10b981; font-weight: 700; text-decoration: none;">🌱 Еко-Оборона</a></li>
+          <li><a href="children_future.html" style="color: #aaa; text-decoration: none;">👧👦 Діти Війни</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="color: #fff; margin-bottom: 12px;">Контакти Еко-Хабу</h4>
+        <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 6px;">📍 Київ / Зелений Хаб</p>
+        <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 6px;">📞 Розміновання: 0 800 500 042</p>
+        <p style="color: #aaa; font-size: 0.9rem;">✉️ eco@razom-sila.org</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderEco();
+    });
+
+    function renderEco() {
+      const cont = document.getElementById('ecoContainer');
+      if (!cont || !window.FoundationStore || !FoundationStore.getEcoProjects) return;
+      const list = FoundationStore.getEcoProjects();
+
+      cont.innerHTML = list.map(p => {
+        const pct = Math.min(100, Math.round((p.collected / p.needAmount) * 100));
+        return `
+          <div class="eco-card sleek-card">
+            <img src="${p.img}" alt="${p.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 18px; margin-bottom: 16px;">
+            <div>
+              <div style="font-size: 0.85rem; color: #10b981; font-weight: 700;">📍 ${p.region}</div>
+              <h3 style="color: #fff; font-size: 1.35rem; margin: 6px 0; font-weight: 800;">${p.title}</h3>
+              <p style="color: #bbb; font-size: 0.9rem; line-height: 1.6; font-style: italic; margin-bottom: 16px;">${p.desc}</p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #aaa;">
+                <span>Зібрано: <strong style="color: #fff;">${p.collected.toLocaleString('uk-UA')} ₴</strong></span>
+                <span>Ціль: ${p.needAmount.toLocaleString('uk-UA')} ₴</span>
+              </div>
+              <div class="progress-bar-eco">
+                <div class="progress-fill-eco" style="width: ${pct}%;"></div>
+              </div>
+              <button onclick="donateEcoProject('${p.id}', '${p.title.replace(/'/g, "\\'")}')" class="btn btn-primary" style="background: #10b981; border-color: #10b981; width: 100%; padding: 14px; border-radius: 14px; font-weight: 800; margin-top: 12px;">
+                ${p.status === 'completed' ? '🟢 Успішно профінансовано' : '🌱 Підтримати проєкт розмінування'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function donateEcoProject(id, title) {
+      const amt = prompt(`Введіть суму донату на проєкт «${title}» (грн):`, "1000");
+      if (amt && !isNaN(amt)) {
+        if (window.FoundationStore && FoundationStore.addEcoDonation) {
+          FoundationStore.addEcoDonation(id, Number(amt));
+          renderEco();
+          alert(`🎉 Щиро дякуємо! Ваш внесок ${amt} ₴ наближає повне очищення українських земель!`);
+        }
+      }
+    }
+
+    function donateForest() {
+      if (window.FoundationStore && FoundationStore.addEcoDonation) {
+        FoundationStore.addEcoDonation('ECO-2', 1000);
+        renderEco();
+        alert("🎉 Неймовірно! Ви щойно профінансували висадку 10 молодих дубів у Серебрянському лісі! 🌲🇺🇦");
+      }
+    }
+  </script>
+  <script src="ai_widget.js"></script>
+</body>
+</html>

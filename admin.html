@@ -68,6 +68,8 @@
           <li class="nav-item" onclick="switchSection('animals', this)">🐾 Хвостаті Патрони (Тварини)</li>
           <li class="nav-item" onclick="switchSection('legalaid', this)">⚖️ Юридична Допомога (Рапорти)</li>
           <li class="nav-item" onclick="switchSection('users', this)">👥 База Профілів та Меценатів</li>
+          <li class="nav-item" onclick="switchSection('eco', this)">🌱 Еко-Оборона (Розмінування)</li>
+          <li class="nav-item" onclick="switchSection('kids', this)">👧👦 Діти Війни (Освітній Хаб)</li>
         </ul>
       </div>
 
@@ -999,6 +1001,59 @@
         <div class="admin-card">
           <h2 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">🌟 VIP Меценати</h2>
           <div id="usersAdminContainer" style="color: #fff;"></div>
+        </div>
+      </section>
+
+      <!-- SECTION 28: Eco Defense & Demining -->
+      <section id="sec-eco" style="display: none;">
+        <div class="topbar">
+          <h1 class="page-title">🌱 Управління Еко-Обороною та Розмінуванням</h1>
+          <div style="color: #10b981; font-weight: 700;">● Очищення полів • Відродження лісів</div>
+        </div>
+        <div class="admin-card">
+          <h2 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">🚜 Каталог екологічних проєктів та міношукачів</h2>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Назва проєкту</th>
+                  <th>Регіон / Область</th>
+                  <th>Зібрано / Ціль</th>
+                  <th>Статус</th>
+                  <th>Дії</th>
+                </tr>
+              </thead>
+              <tbody id="ecoTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 29: Children of War Requests -->
+      <section id="sec-kids" style="display: none;">
+        <div class="topbar">
+          <h1 class="page-title">👧👦 Управління Освітнім Хабом «Діти Війни»</h1>
+          <div style="color: #a855f7; font-weight: 700;">● Ноутбуки для школи • Табори в Карпатах</div>
+        </div>
+        <div class="admin-card">
+          <h2 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">🎒 Реєстр заявок на допомогу дітям Героїв</h2>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID / Дата</th>
+                  <th>Дитина / Вік</th>
+                  <th>Родина / Захисник</th>
+                  <th>Місто</th>
+                  <th>Потреба</th>
+                  <th>Статус</th>
+                  <th>Дії</th>
+                </tr>
+              </thead>
+              <tbody id="kidsTableBody"></tbody>
+            </table>
+          </div>
         </div>
       </section>
 

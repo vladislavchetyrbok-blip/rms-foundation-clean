@@ -68,6 +68,8 @@ function switchSection(sec, btnEl) {
   if (document.getElementById('sec-animals')) document.getElementById('sec-animals').style.display = sec === 'animals' ? 'block' : 'none';
   if (document.getElementById('sec-legalaid')) document.getElementById('sec-legalaid').style.display = sec === 'legalaid' ? 'block' : 'none';
   if (document.getElementById('sec-users')) document.getElementById('sec-users').style.display = sec === 'users' ? 'block' : 'none';
+  if (document.getElementById('sec-eco')) document.getElementById('sec-eco').style.display = sec === 'eco' ? 'block' : 'none';
+  if (document.getElementById('sec-kids')) document.getElementById('sec-kids').style.display = sec === 'kids' ? 'block' : 'none';
 
   renderAllAdmin();
 }
@@ -99,6 +101,8 @@ function renderAllAdmin() {
   if (typeof renderAdminAnimals === 'function') renderAdminAnimals();
   if (typeof renderAdminLegalAid === 'function') renderAdminLegalAid();
   if (typeof renderAdminUsers === 'function') renderAdminUsers();
+  if (typeof renderAdminEco === 'function') renderAdminEco();
+  if (typeof renderAdminKids === 'function') renderAdminKids();
 }
 
 // === Section 1: Stats ===
@@ -1760,6 +1764,12 @@ function exportAllDataCSV() {
   if (data.legalRequests) {
     data.legalRequests.forEach(l => csv += `Юридична Опора;${l.id} (${l.soldier});${l.category} / ${l.unit};${l.statusLabel};${l.date}\n`);
   }
+  if (data.ecoProjects) {
+    data.ecoProjects.forEach(e => csv += `Еко-Оборона;${e.id} (${e.title});Зібрано ${e.collected} з ${e.needAmount};${e.status};-\n`);
+  }
+  if (data.childrenRequests) {
+    data.childrenRequests.forEach(k => csv += `Діти Війни;${k.id} (${k.childName});${k.requestType} / ${k.city};${k.statusLabel};${k.date}\n`);
+  }
 
   const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
@@ -1771,4 +1781,73 @@ function exportAllDataCSV() {
   document.body.removeChild(a);
   alert("📥 Звіт успішно експортовано в Excel (CSV)!");
 }
+
+// === Section 28: Eco Defense ===
+function renderAdminEco() {
+  const tbody = document.getElementById('ecoTableBody');
+  if (!tbody || !window.FoundationStore || !FoundationStore.getEcoProjects) return;
+  const list = FoundationStore.getEcoProjects();
+  tbody.innerHTML = list.map(p => `
+    <tr>
+      <td><strong style="color: #10b981;">${p.id}</strong></td>
+      <td><strong style="color: #fff;">${p.title}</strong><br><small style="color: #aaa;">${p.desc.slice(0, 60)}...</small></td>
+      <td>📍 ${p.region}</td>
+      <td><strong style="color: var(--accent-gold);">${p.collected.toLocaleString()} ₴</strong> / ${p.needAmount.toLocaleString()} ₴</td>
+      <td><span style="color: ${p.status === 'completed' ? '#10b981' : '#f59e0b'}; font-weight: 700;">${p.status === 'completed' ? '🟢 Профінансовано' : '🟡 Триває збір'}</span></td>
+      <td>
+        <button class="btn-admin btn-del" onclick="deleteAdminEco('${p.id}')">✕</button>
+      </td>
+    </tr>
+  `).join('');
+}
+function deleteAdminEco(id) {
+  if (confirm(`Видалити еко-проєкт ${id}?`)) {
+    if (window.FoundationStore && FoundationStore.deleteEcoProject) {
+      FoundationStore.deleteEcoProject(id);
+      renderAdminEco();
+    }
+  }
+}
+
+// === Section 29: Children of War ===
+function renderAdminKids() {
+  const tbody = document.getElementById('kidsTableBody');
+  if (!tbody || !window.FoundationStore || !FoundationStore.getChildrenRequests) return;
+  const list = FoundationStore.getChildrenRequests();
+  tbody.innerHTML = list.map(k => `
+    <tr>
+      <td><strong style="color: #a855f7;">${k.id}</strong><br><small style="color: #888;">${k.date}</small></td>
+      <td><strong style="color: #fff;">${k.childName}</strong></td>
+      <td><strong style="color: #ccc;">${k.parentInfo}</strong></td>
+      <td>📍 ${k.city}</td>
+      <td><strong style="color: var(--accent-gold);">${k.requestType}</strong><br><small style="color: #aaa;">${k.notes || ''}</small></td>
+      <td>
+        <select onchange="updateAdminKidStatus('${k.id}', this.value)" style="padding: 6px; border-radius: 8px; background: #070e1e; color: #fff; border: 1px solid var(--admin-border);">
+          <option value="in_progress" ${k.status === 'in_progress' ? 'selected' : ''}>🟡 В обробці</option>
+          <option value="approved" ${k.status === 'approved' ? 'selected' : ''}>🟢 Задоволено (Надано)</option>
+          <option value="rejected" ${k.status === 'rejected' ? 'selected' : ''}>🔴 Відхилено</option>
+        </select>
+      </td>
+      <td>
+        <button class="btn-admin btn-del" onclick="deleteAdminKid('${k.id}')">✕</button>
+      </td>
+    </tr>
+  `).join('');
+}
+function updateAdminKidStatus(id, status) {
+  if (window.FoundationStore && FoundationStore.updateChildStatus) {
+    FoundationStore.updateChildStatus(id, status);
+    renderAdminKids();
+    alert(`🎉 Статус запиту ${id} оновлено!`);
+  }
+}
+function deleteAdminKid(id) {
+  if (confirm(`Видалити запит ${id}?`)) {
+    if (window.FoundationStore && FoundationStore.deleteChildRequest) {
+      FoundationStore.deleteChildRequest(id);
+      renderAdminKids();
+    }
+  }
+}
+
 

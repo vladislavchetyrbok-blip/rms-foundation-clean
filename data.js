@@ -581,7 +581,16 @@ const INITIAL_DATA = {
       { id: 'H-3', date: '25.06.2026', action: 'Придбання Золотої Благодійної Цеглинки', amount: 50000, status: 'Успішно' },
       { id: 'H-4', date: '15.06.2026', action: 'Донат на реабілітацію кіборгів', amount: 57500, status: 'Успішно' }
     ]
-  }
+  },
+  ecoProjects: [
+    { id: 'ECO-1', title: 'Роботизований комплекс розмінування "Скіф-М"', region: 'Херсонщина (Аграрний сектор)', needAmount: 450000, collected: 320000, desc: 'Закупівля важкого дрона-міношукача та дистанційної фрези для очищення посівних полів від протипіхотних мін та залишків касетних боєприпасів.', status: 'active', img: 'media__1783040943180.jpg' },
+    { id: 'ECO-2', title: 'Відродження Серебрянського Лісу (10,000 саджанців)', region: 'Луганщина / Донеччина', needAmount: 150000, collected: 150000, desc: 'Висадка стійких до посухи дубів та сосен на місці випалених бойовими діями лісових масивів. Спільна програма з екологами України.', status: 'completed', img: 'media__1783040943180.jpg' },
+    { id: 'ECO-3', title: 'Мобільна лабораторія аналізу води та ґрунтів', region: 'Миколаївська область', needAmount: 280000, collected: 95000, desc: 'Експрес-діагностика питної води в прифронтових селах на вміст важких металів та порохових залишків.', status: 'active', img: 'media__1783040943180.jpg' }
+  ],
+  childrenRequests: [
+    { id: 'KID-1', childName: 'Остап (10 років)', parentInfo: 'Син полеглого Героя 93-ї ОМБр', city: 'Бахмут / Київ', requestType: 'Ноутбук для школи', date: '06.07.2026', status: 'in_progress', statusLabel: '🟡 В процесі закупівлі', notes: 'Потрібен ноутбук для дистанційного навчання та курсів програмування' },
+    { id: 'KID-2', childName: 'Софія (14 років)', parentInfo: 'Донька ветерана з інвалідністю', city: 'Харків', requestType: 'Путівка в кемп "Горизонт"', date: '05.07.2026', status: 'approved', statusLabel: '🟢 Путівку надано', notes: 'Зміна в Карпатах з 15 по 28 липня, оплачено фондом' }
+  ]
 };
 window.FoundationStore = {
   getData() {
@@ -1379,6 +1388,63 @@ window.FoundationStore = {
       action, amount: Number(amount), status: 'Успішно'
     });
     this.saveData(data);
+  },
+
+  // === Eco Defense Methods ===
+  getEcoProjects() {
+    return this.getData().ecoProjects || [];
+  },
+  addEcoDonation(id, amount) {
+    const data = this.getData();
+    if (!data.ecoProjects) return;
+    const p = data.ecoProjects.find(x => x.id === id);
+    if (p) {
+      p.collected += Number(amount);
+      if (p.collected >= p.needAmount) p.status = 'completed';
+      this.saveData(data);
+    }
+  },
+  deleteEcoProject(id) {
+    const data = this.getData();
+    if (data.ecoProjects) {
+      data.ecoProjects = data.ecoProjects.filter(x => x.id !== id);
+      this.saveData(data);
+    }
+  },
+
+  // === Children Future Methods ===
+  getChildrenRequests() {
+    return this.getData().childrenRequests || [];
+  },
+  addChildRequest(childName, parentInfo, city, requestType, notes) {
+    const data = this.getData();
+    if (!data.childrenRequests) data.childrenRequests = [];
+    const id = 'KID-' + Math.floor(100 + Math.random() * 900);
+    data.childrenRequests.unshift({
+      id, childName, parentInfo, city, requestType, date: new Date().toLocaleDateString('uk-UA'),
+      status: 'in_progress', statusLabel: '🟡 В обробці координатора', notes
+    });
+    this.saveData(data);
+    return id;
+  },
+  updateChildStatus(id, status) {
+    const data = this.getData();
+    if (!data.childrenRequests) return;
+    const item = data.childrenRequests.find(c => c.id === id);
+    if (item) {
+      item.status = status;
+      if (status === 'approved') item.statusLabel = '🟢 Запит задоволено (Надано)';
+      else if (status === 'in_progress') item.statusLabel = '🟡 В процесі закупівлі';
+      else if (status === 'rejected') item.statusLabel = '🔴 Відхилено';
+      this.saveData(data);
+    }
+  },
+  deleteChildRequest(id) {
+    const data = this.getData();
+    if (data.childrenRequests) {
+      data.childrenRequests = data.childrenRequests.filter(c => c.id !== id);
+      this.saveData(data);
+    }
   }
 };
 
