@@ -1023,3 +1023,25 @@ window.FoundationStore = {
 if (typeof window !== 'undefined' && window.FoundationStore) {
   window.FoundationStore.initOnlineSync();
 }
+
+
+// === УНІВЕРСАЛЬНЕ ПОЛІПШЕННЯ UX ДЛЯ ВСІЄЇ ЕКОСИСТЕМИ (ESC & Overlay Click) ===
+if (typeof window !== 'undefined') {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('div[id$="Modal"], div[id*="modal"], div[id*="Modal"]').forEach(m => {
+        if (window.getComputedStyle(m).position === 'fixed' && (m.style.display === 'flex' || m.style.display === 'block')) {
+          m.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target && e.target.id && (e.target.id.endsWith('Modal') || e.target.id.includes('modal') || e.target.id.includes('Modal'))) {
+      if (window.getComputedStyle(e.target).position === 'fixed' && (e.target.style.display === 'flex' || e.target.style.display === 'block')) {
+        e.target.style.display = 'none';
+      }
+    }
+  });
+}
