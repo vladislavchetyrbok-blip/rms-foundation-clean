@@ -241,7 +241,7 @@
           <div class="impact-grid">
             <div class="impact-item">
               <div style="font-size: 2.5rem; margin-bottom: 8px;">🛸</div>
-              <div style="color: #10b981; font-size: 1.8rem; font-weight: 900;" id="impDrones">12 С€С‚.</div>
+              <div style="color: #10b981; font-size: 1.8rem; font-weight: 900;" id="impDrones">12 шт.</div>
               <div style="color: #ccc; font-size: 0.9rem; margin-top: 4px; font-weight: 600;">FPV-дронів з нічною камерою</div>
             </div>
             <div class="impact-item">
@@ -251,7 +251,7 @@
             </div>
             <div class="impact-item">
               <div style="font-size: 2.5rem; margin-bottom: 8px;">🏥</div>
-              <div style="color: #f59e0b; font-size: 1.8rem; font-weight: 900;" id="impMedkits">60 С€С‚.</div>
+              <div style="color: #f59e0b; font-size: 1.8rem; font-weight: 900;" id="impMedkits">60 шт.</div>
               <div style="color: #ccc; font-size: 0.9rem; margin-top: 4px; font-weight: 600;">Аптечок TCCC / MARCH</div>
             </div>
             <div class="impact-item" style="border-color: var(--accent-gold); background: rgba(255,183,3,0.08);">
@@ -476,9 +476,9 @@
       const starlinks = Math.max(1, Math.round(num / 150000));
       const medkits = Math.round(num / 5000);
 
-      document.getElementById('impDrones').textContent = drones + ' С€С‚.';
+      document.getElementById('impDrones').textContent = drones + ' шт.';
       document.getElementById('impStarlinks').textContent = starlinks + ' компл.';
-      document.getElementById('impMedkits').textContent = medkits + ' С€С‚.';
+      document.getElementById('impMedkits').textContent = medkits + ' шт.';
 
       let status = '🥉 Бронзовий Партнер';
       if (num >= 500000) status = '🥇 Золотий Титан';
