@@ -12,7 +12,7 @@
       position: relative;
       padding: 100px 20px 60px;
       text-align: center;
-      background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.15) 0%, rgba(7, 14, 30, 0.95) 70%), url('media__1783040943196.jpg') center/cover;
+      background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.15) 0%, rgba(7, 14, 30, 0.95) 70%), url('honor_patron.jpg') center/cover;
       border-bottom: 2px solid rgba(16, 185, 129, 0.3);
       overflow: hidden;
     }
@@ -230,7 +230,7 @@
       const list = FoundationStore.getVeteranBusinesses();
       grid.innerHTML = list.map(v => `
         <div class="vet-card">
-          <div class="vet-img" style="background-image: url('${v.img || 'media__1783040943196.jpg'}');">
+          <div class="vet-img" style="background-image: url('${v.img || 'honor_patron.jpg'}');">
             <span class="vet-cat">${v.category}</span>
           </div>
           <div class="vet-body">

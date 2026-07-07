@@ -956,6 +956,35 @@ footer {
   transform: scale(1);
 }
 
+.modal-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 12px;
+}
+
+.modal-tab {
+  border: 1px solid var(--border-glass);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  padding: 9px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.modal-tab:hover,
+.modal-tab.active,
+.modal-tab[aria-selected="true"] {
+  background: rgba(255, 183, 3, 0.16);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
 .modal-close {
   position: absolute;
   top: 24px; right: 24px;
@@ -2154,7 +2183,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* 4. Ergonomic Buttons with Soothing Tactile Feedback */
-.btn, .btn-primary, .btn-gold, button:not(#rmsMegaMenuBtn):not(.top-lang-btn):not(.titan-qbtn):not(.lang-btn) {
+.btn, .btn-primary, .btn-gold, button:not(#rmsMegaMenuBtn):not(#titanAiButton):not(.top-lang-btn):not(.titan-qbtn):not(.lang-btn) {
   border-radius: 16px !important;
   padding: 14px 28px !important;
   font-weight: 700 !important;
@@ -2273,4 +2302,3 @@ p, li, td, th {
   background: var(--accent-gold);
   box-shadow: 0 0 10px rgba(255, 183, 3, 0.5);
 }
-

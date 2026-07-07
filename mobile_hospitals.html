@@ -12,7 +12,7 @@
       position: relative;
       padding: 100px 20px 60px;
       text-align: center;
-      background: radial-gradient(circle at 50% 30%, rgba(239, 68, 68, 0.15) 0%, rgba(7, 14, 30, 0.95) 70%), url('media__1783040943246.jpg') center/cover;
+      background: radial-gradient(circle at 50% 30%, rgba(239, 68, 68, 0.15) 0%, rgba(7, 14, 30, 0.95) 70%), url('work_hospital_ward.jpg') center/cover;
       border-bottom: 2px solid rgba(239, 68, 68, 0.3);
       overflow: hidden;
     }
@@ -266,7 +266,7 @@
         const isComp = h.status === 'completed';
         return `
           <div class="hosp-card">
-            <div class="hosp-img" style="background-image: url('${h.img || 'media__1783040943246.jpg'}');">
+            <div class="hosp-img" style="background-image: url('${h.img || 'work_hospital_ward.jpg'}');">
               <span class="hosp-status ${isComp ? 'status-completed' : 'status-active'}">${isComp ? '🟢 Профінансовано' : '🟡 Триває збір'}</span>
             </div>
             <div class="hosp-body">

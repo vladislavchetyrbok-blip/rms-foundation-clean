@@ -28,6 +28,11 @@
       transform: scale(1.1) rotate(5deg);
       box-shadow: 0 12px 40px rgba(245, 158, 11, 0.8);
     }
+    .rms-at-top #titanAiButton {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px) scale(0.86);
+    }
     @keyframes titanPulse {
       0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
       70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); }
@@ -193,41 +198,62 @@
     /* === GLOBAL MEGA-MENU TOP BAR & OVERLAY === */
     #rmsTopBar {
       background: linear-gradient(90deg, #070e1e, #131f42, #070e1e);
-      border-bottom: 2px solid rgba(255, 183, 3, 0.5);
-      padding: 10px 24px;
+      border-bottom: 1px solid rgba(255, 183, 3, 0.28);
+      padding: 6px 18px;
+      min-height: 42px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 14px;
+      flex-wrap: nowrap;
       font-family: 'Montserrat', 'Inter', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       color: #cbd5e1;
       position: sticky;
       top: 0;
-      z-index: 999999;
-      box-shadow: 0 4px 25px rgba(0,0,0,0.8);
+      z-index: 240;
+      box-shadow: 0 3px 18px rgba(0,0,0,0.45);
       backdrop-filter: blur(12px);
+    }
+    #rmsTopBar > div { min-width: 0; }
+    #rmsTopBar > div:first-child {
+      flex: 1;
+      overflow: hidden;
+    }
+    #rmsTopBar > div:first-child > span:first-child {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    #rmsTopBar .topbar-hide-mob {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #topLangSwitcher {
+      display: none !important;
     }
     #rmsMegaMenuBtn {
       background: linear-gradient(135deg, #ffb703, #f59e0b, #d97706);
       color: #000;
-      border: 2px solid #fff;
-      padding: 10px 22px;
+      border: 1px solid rgba(255,255,255,0.78);
+      padding: 7px 14px;
+      min-height: 34px;
       border-radius: 50px;
       font-weight: 900;
-      font-size: 0.9rem;
-      letter-spacing: 0.5px;
+      font-size: 0.78rem;
+      letter-spacing: 0.2px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 0 25px rgba(255, 183, 3, 0.8), 0 0 40px rgba(245, 158, 11, 0.5);
+      box-shadow: 0 0 16px rgba(255, 183, 3, 0.35);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      animation: megaBtnPulse 2s infinite;
       text-transform: uppercase;
+      white-space: nowrap;
     }
     #rmsMegaMenuBtn:hover {
-      transform: scale(1.06);
-      box-shadow: 0 0 35px rgba(255, 183, 3, 1), 0 0 60px rgba(245, 158, 11, 0.8);
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px rgba(255, 183, 3, 0.55);
       background: linear-gradient(135deg, #fbbf24, #ffb703);
     }
     @keyframes megaBtnPulse {
@@ -303,9 +329,15 @@
       flex: 1;
     }
     @media (max-width: 1100px) { .mega-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 900px) {
+      #rmsTopBar .topbar-hide-mob { display: none !important; }
+    }
     @media (max-width: 768px) { 
       .mega-grid { grid-template-columns: 1fr; }
-      .topbar-hide-mob { display: none; }
+      #rmsTopBar { padding: 8px 12px; justify-content: center; }
+      #rmsTopBar > div:first-child { display: none !important; }
+      #rmsMegaMenuBtn { width: 100%; justify-content: center; font-size: 0.78rem; padding: 8px 12px; }
+      .topbar-hide-mob { display: none !important; }
       .mega-header { flex-direction: column; gap: 15px; }
     }
     .mega-col {
@@ -371,11 +403,19 @@
   document.head.appendChild(style);
 
   // Create Button
-  const btn = document.createElement('div');
+  const btn = document.createElement('button');
   btn.id = 'titanAiButton';
+  btn.type = 'button';
   btn.title = 'AI-Консультант «Бот Титан 🇺🇦»';
+  btn.setAttribute('aria-label', 'Відкрити AI-консультанта фонду');
   btn.innerHTML = '🤖';
   document.body.appendChild(btn);
+
+  const updateTitanVisibility = () => {
+    document.body.classList.toggle('rms-at-top', window.scrollY < 240);
+  };
+  window.addEventListener('scroll', updateTitanVisibility, { passive: true });
+  updateTitanVisibility();
 
   // Create Widget
   const widget = document.createElement('div');
@@ -483,11 +523,11 @@
   topBar.id = 'rmsTopBar';
   topBar.innerHTML = `
     <div style="display: flex; align-items: center; gap: 15px;">
-      <span style="color: #10b981; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+      <span class="top-status" style="color: #10b981; font-weight: 700; display: flex; align-items: center; gap: 6px;">
         <span style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981;"></span>
         ОНЛАЙН ЕКОСИСТЕМА ФОНДУ
       </span>
-      <span class="topbar-hide-mob" style="color: #94a3b8;">● 32+ активні напрямки • НБУ та 501(c)(3) верифікація</span>
+      <span class="top-info topbar-hide-mob" style="color: #94a3b8;">● 32+ активні напрямки • НБУ та 501(c)(3) верифікація</span>
     </div>
     <div style="display: flex; align-items: center; gap: 12px;">
       <div id="topLangSwitcher" style="display: flex; gap: 4px; background: rgba(0,0,0,0.4); padding: 3px 6px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
@@ -713,9 +753,10 @@
     const dict = WIDGET_I18N[lang] || WIDGET_I18N['uk'];
     const topBarEl = document.getElementById('rmsTopBar');
     if (topBarEl) {
-      const spans = topBarEl.querySelectorAll('span');
-      if (spans[1]) spans[1].innerHTML = `<span style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981;"></span> ${dict.top_status}`;
-      if (spans[3]) spans[3].textContent = dict.top_info;
+      const status = topBarEl.querySelector('.top-status');
+      const info = topBarEl.querySelector('.top-info');
+      if (status) status.innerHTML = `<span style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981;"></span> ${dict.top_status}`;
+      if (info) info.textContent = dict.top_info;
     }
     const megaBtn = document.getElementById('rmsMegaMenuBtn');
     if (megaBtn && megaBtn.firstElementChild) megaBtn.firstElementChild.textContent = dict.mega_btn;

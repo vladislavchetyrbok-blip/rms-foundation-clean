@@ -7,6 +7,32 @@
 const STORAGE_KEY = 'rms_foundation_data_v5';
 const ONLINE_BIN_ID = '6a4708aef5f4af5e2957274f';
 const ONLINE_API_KEY = '$2a$10$a.w5fqFGgNDtxm.14mCh3us9zVhiSRK7fng26ppAnKWesY1g.noMe';
+const ASSET_FALLBACKS = {
+  'media__1783040943180.jpg': 'hero.png',
+  'media__1783040943183.jpg': 'work_rehab_chairs.jpg',
+  'media__1783040943186.jpg': 'work_kids_toys.jpg',
+  'media__1783040943196.jpg': 'honor_patron.jpg',
+  'media__1783040943246.jpg': 'work_hospital_ward.jpg',
+  'media__1783038868575.jpg': 'honor_cargo.jpg',
+  'media__1783038868580.jpg': 'honor_logistics.jpg',
+  'media__1783038868590.jpg': 'honor_media.jpg',
+  'media__1783038868596.jpg': 'honor_driver.jpg',
+  'media__1783038868601.jpg': 'logo.png',
+  'media__1782942639584.png': 'hero.png',
+  'media__1782942624904.png': 'honor_patron.jpg',
+  'media__1782942577758.png': 'hero.png'
+};
+
+function normalizeAssetPaths(value) {
+  if (typeof value === 'string') return ASSET_FALLBACKS[value] || value;
+  if (Array.isArray(value)) return value.map(normalizeAssetPaths);
+  if (value && typeof value === 'object') {
+    Object.keys(value).forEach(key => {
+      value[key] = normalizeAssetPaths(value[key]);
+    });
+  }
+  return value;
+}
 
 const INITIAL_DATA = {
   stats: {
@@ -435,12 +461,12 @@ const INITIAL_DATA = {
     { id: 'br_8', name: 'Анонімний Благодійник', amount: '25 000 ₴', message: 'На РЕБ для хлопців на Донбасі. Разом ми сила!', country: 'uk', date: '28.06.2026' }
   ],
   shopItems: [
-    { id: 'sh_1', title: 'Розписана гільза 155-мм від артилерії', category: '🏆 Артефакти з фронту', price: '10 000 ₴', desc: 'Аутентична гільза від гаубиці М777, привезена з Бахмутського напрямку. Художній петриківський розпис від волонтерів.', image: 'media__1783038868575.jpg', inStock: true },
-    { id: 'sh_2', title: 'Тубус від гранатомета NLAW / Javelin', category: '🏆 Артефакти з фронту', price: '25 000 ₴', desc: 'Відстріляний тубус з підписами командирів штурмових батальйонів. Легендарний трофей для офісу чи колекції.', image: 'media__1783038868580.jpg', inStock: true },
-    { id: 'sh_3', title: 'Тактичне худі «Разом ми — сила» (Олива)', category: '👕 Одяг та Мерч', price: '2 500 ₴', desc: 'Преміальна щільна бавовна 350г/м², велкро-панелі для шевронів на рукавах. 100% прибутку йде на дрони.', image: 'media__1783038868590.jpg', inStock: true },
-    { id: 'sh_4', title: 'Бойовий прапор з підписами бійців ППО', category: '🏆 Артефакти з фронту', price: '15 000 ₴', desc: 'Оригінальний державний прапор України (150х90 см) з автографами та побажаннями від мобільних вогневих груп Київщини.', image: 'media__1783038868596.jpg', inStock: true },
-    { id: 'sh_5', title: 'Фірмовий тактичний 3D патч (Шеврон)', category: '🛡️ Шеврони та Сувеніри', price: '500 ₴', desc: 'Високоякісний ПВХ шеврон на липучці (велкро) з символікою фонду. Вологостійкий та довговічний.', image: 'media__1783038868601.jpg', inStock: true },
-    { id: 'sh_6', title: 'Термокухоль «Небесний Щит» (500 мл)', category: '🛡️ Шеврони та Сувеніри', price: '1 200 ₴', desc: 'Матовий чорний термокухоль з лазерним гравіюванням нашої головної операції. Тримає тепло до 12 годин.', image: 'media__1783040943180.jpg', inStock: true }
+    { id: 'sh_1', title: 'Розписана гільза 155-мм від артилерії', category: '🏆 Артефакти з фронту', price: '10 000 ₴', desc: 'Аутентична гільза від гаубиці М777, привезена з Бахмутського напрямку. Художній петриківський розпис від волонтерів.', image: 'honor_cargo.jpg', inStock: true },
+    { id: 'sh_2', title: 'Тубус від гранатомета NLAW / Javelin', category: '🏆 Артефакти з фронту', price: '25 000 ₴', desc: 'Відстріляний тубус з підписами командирів штурмових батальйонів. Легендарний трофей для офісу чи колекції.', image: 'honor_logistics.jpg', inStock: true },
+    { id: 'sh_3', title: 'Тактичне худі «Разом ми — сила» (Олива)', category: '👕 Одяг та Мерч', price: '2 500 ₴', desc: 'Преміальна щільна бавовна 350г/м², велкро-панелі для шевронів на рукавах. 100% прибутку йде на дрони.', image: 'honor_media.jpg', inStock: true },
+    { id: 'sh_4', title: 'Бойовий прапор з підписами бійців ППО', category: '🏆 Артефакти з фронту', price: '15 000 ₴', desc: 'Оригінальний державний прапор України (150х90 см) з автографами та побажаннями від мобільних вогневих груп Київщини.', image: 'honor_driver.jpg', inStock: true },
+    { id: 'sh_5', title: 'Фірмовий тактичний 3D патч (Шеврон)', category: '🛡️ Шеврони та Сувеніри', price: '500 ₴', desc: 'Високоякісний ПВХ шеврон на липучці (велкро) з символікою фонду. Вологостійкий та довговічний.', image: 'logo.png', inStock: true },
+    { id: 'sh_6', title: 'Термокухоль «Небесний Щит» (500 мл)', category: '🛡️ Шеврони та Сувеніри', price: '1 200 ₴', desc: 'Матовий чорний термокухоль з лазерним гравіюванням нашої головної операції. Тримає тепло до 12 годин.', image: 'hero.png', inStock: true }
   ],
   shopOrders: [
     { id: 'ORD-5012', item: 'Тактичне худі «Разом ми — сила» (Олива)', customer: 'Ігор Бондаренко', phone: '+380971234567', address: 'м. Київ, Нова Пошта №45', date: '05.07.2026', status: 'new', statusLabel: '🟡 Очікує відправки' },
@@ -459,9 +485,9 @@ const INITIAL_DATA = {
     { id: 'REG-903', courseTitle: '💣 Мінно-вибухова безпека (EORE / EOD)', name: 'Віталій Сидоренко', phone: '+380678889900', role: 'Цивільний', date: '03.07.2026', status: 'pending', statusLabel: '🟡 В обробці' }
   ],
   rehabVeterans: [
-    { id: 'rh_1', name: 'Олександр «Молот»', callsign: '3-тя ОШБр', injury: 'Втрата правої кінцівки внаслідок мінно-вибухової травми під Бахмутом', treatment: 'Виготовлення біонічного протезу кінцівки Esper Hand та курс реабілітації', clinic: 'Клініка Superhumans / Нове Життя (Львів)', status: 'funded', statusLabel: '🟢 Протез встановлено, проходить адаптацію', story: 'Після тяжкого поранення у траншеї Олександр не здався. Завдяки донорам фонду він отримав сучасний біонічний протез і зараз викладає пілотування FPV-дронів у нашій Академії.', image: 'media__1783040943183.jpg', needAmount: 850000, collectedAmount: 850000 },
-    { id: 'rh_2', name: 'Дмитро «Сокіл»', callsign: '80-та ОДШБр', injury: 'Ампутація гомілки та контузія під Кліщіївкою', treatment: 'Спортивний біговий протез Ottobock та курс психологічної декомпресії', clinic: 'Центр Нескорені / Unbroken (Київ)', status: 'active', statusLabel: '🟡 Триває збір на спортивний протез', story: 'Дмитро мріє повернутися до активного спорту та взяти участь у «Іграх Нескорених». Зібрано вже 70% суми на спеціальний біговий протез з карбонового волокна.', image: 'media__1783040943186.jpg', needAmount: 620000, collectedAmount: 435000 },
-    { id: 'rh_3', name: 'Максим «Волиняк»', callsign: '24-та ОМБр', injury: 'Осколкове поранення спини та тяжкий ПТСР', treatment: 'Інтенсивний 3-місячний курс нейрорегабілітації та арт-терапії в Карпатах', clinic: 'Ветеранський хаб «Відродження» (Івано-Франківськ)', status: 'active', statusLabel: '🟡 Триває збір на курс реабілітації', story: 'Максим провів 8 місяців на нулі. Зараз він потребує якісного психологічного розвантаження та нейростимуляції для відновлення сну та координації.', image: 'media__1783040943196.jpg', needAmount: 180000, collectedAmount: 142000 }
+    { id: 'rh_1', name: 'Олександр «Молот»', callsign: '3-тя ОШБр', injury: 'Втрата правої кінцівки внаслідок мінно-вибухової травми під Бахмутом', treatment: 'Виготовлення біонічного протезу кінцівки Esper Hand та курс реабілітації', clinic: 'Клініка Superhumans / Нове Життя (Львів)', status: 'funded', statusLabel: '🟢 Протез встановлено, проходить адаптацію', story: 'Після тяжкого поранення у траншеї Олександр не здався. Завдяки донорам фонду він отримав сучасний біонічний протез і зараз викладає пілотування FPV-дронів у нашій Академії.', image: 'work_rehab_chairs.jpg', needAmount: 850000, collectedAmount: 850000 },
+    { id: 'rh_2', name: 'Дмитро «Сокіл»', callsign: '80-та ОДШБр', injury: 'Ампутація гомілки та контузія під Кліщіївкою', treatment: 'Спортивний біговий протез Ottobock та курс психологічної декомпресії', clinic: 'Центр Нескорені / Unbroken (Київ)', status: 'active', statusLabel: '🟡 Триває збір на спортивний протез', story: 'Дмитро мріє повернутися до активного спорту та взяти участь у «Іграх Нескорених». Зібрано вже 70% суми на спеціальний біговий протез з карбонового волокна.', image: 'work_medical_aid.jpg', needAmount: 620000, collectedAmount: 435000 },
+    { id: 'rh_3', name: 'Максим «Волиняк»', callsign: '24-та ОМБр', injury: 'Осколкове поранення спини та тяжкий ПТСР', treatment: 'Інтенсивний 3-місячний курс нейрорегабілітації та арт-терапії в Карпатах', clinic: 'Ветеранський хаб «Відродження» (Івано-Франківськ)', status: 'active', statusLabel: '🟡 Триває збір на курс реабілітації', story: 'Максим провів 8 місяців на нулі. Зараз він потребує якісного психологічного розвантаження та нейростимуляції для відновлення сну та координації.', image: 'work_hospital_ward.jpg', needAmount: 180000, collectedAmount: 142000 }
   ],
   rehabApplications: [
     { id: 'RH-401', name: 'Віктор Петренко (ветеран 95 ОДШБр)', phone: '+380671122334', type: '🦿 Біонічне протезування', details: 'Ампутація лівої руки нижче ліктя, потребую біонічного протезу', date: '05.07.2026', status: 'review', statusLabel: '🟡 Медична перевірка' },
@@ -475,18 +501,18 @@ const INITIAL_DATA = {
     { id: 'INT-804', donor: 'Stefan & Claudia Weber', country: 'de', countryName: 'Germany 🇩🇪', currency: 'EUR', amount: '1,500 EUR', method: 'SEPA Direct IBAN', date: '02.07.2026', msg: 'Für Frieden und Freiheit in Europa! Slava Ukraini!' }
   ],
   memorialHeroes: [
-    { id: 'mem_1', name: 'Майоренко Олексій «Орел»', rank: 'капітан, командир роти БПЛА', brigade: '72-га ОМБр ім. Чорних Запорожців', awards: 'Герой України (посмертно), Орден «За мужність» І ст.', date: '14 жовтня 2025', place: 'Вугледарський напрямок', story: 'Олексій особисто знищив 14 бронемашин ворога та врятував оточену групу побратимів, прикриваючи їхній відхід вогнем свого розрахунку. Вічна слава та пам\'ять Герою!', image: 'media__1783038868575.jpg', candlesCount: 1420 },
-    { id: 'mem_2', name: 'Коваленко Сергій «Скеля»', rank: 'старший сержант, штурмовик', brigade: '3-тя Окрема Штурмова Бригада', awards: 'Орден «За мужність» ІІ та ІІІ ст.', date: '22 серпня 2025', place: 'околиці Бахмута', story: 'Сергій пройшов найгарячіші точки фронту від Києва до Донбасу. Загинув від ворожого скиду під час евакуації пораненого бійця зі свого взводу. Незламний воїн і вірний друг.', image: 'media__1783038868580.jpg', candlesCount: 980 },
-    { id: 'mem_3', name: 'Веремієнко Андрій «Студент»', rank: 'солдат, бойовий медик', brigade: '82-га ОДШБр', awards: 'Орден «За мужність» ІІІ ст.', date: '10 листопада 2025', place: 'Роботине (Запоріжжя)', story: 'Андрій, студент 4-го курсу медуніверситету, пішов добровольцем у перші дні. Врятував життя понад 40 побратимам під ворожим артобстрілом. Вічна подяка від врятованих бійців.', image: 'media__1783038868590.jpg', candlesCount: 1850 }
+    { id: 'mem_1', name: 'Майоренко Олексій «Орел»', rank: 'капітан, командир роти БПЛА', brigade: '72-га ОМБр ім. Чорних Запорожців', awards: 'Герой України (посмертно), Орден «За мужність» І ст.', date: '14 жовтня 2025', place: 'Вугледарський напрямок', story: 'Олексій особисто знищив 14 бронемашин ворога та врятував оточену групу побратимів, прикриваючи їхній відхід вогнем свого розрахунку. Вічна слава та пам\'ять Герою!', image: 'honor_cargo.jpg', candlesCount: 1420 },
+    { id: 'mem_2', name: 'Коваленко Сергій «Скеля»', rank: 'старший сержант, штурмовик', brigade: '3-тя Окрема Штурмова Бригада', awards: 'Орден «За мужність» ІІ та ІІІ ст.', date: '22 серпня 2025', place: 'околиці Бахмута', story: 'Сергій пройшов найгарячіші точки фронту від Києва до Донбасу. Загинув від ворожого скиду під час евакуації пораненого бійця зі свого взводу. Незламний воїн і вірний друг.', image: 'honor_driver.jpg', candlesCount: 980 },
+    { id: 'mem_3', name: 'Веремієнко Андрій «Студент»', rank: 'солдат, бойовий медик', brigade: '82-га ОДШБр', awards: 'Орден «За мужність» ІІІ ст.', date: '10 листопада 2025', place: 'Роботине (Запоріжжя)', story: 'Андрій, студент 4-го курсу медуніверситету, пішов добровольцем у перші дні. Врятував життя понад 40 побратимам під ворожим артобстрілом. Вічна подяка від врятованих бійців.', image: 'honor_media.jpg', candlesCount: 1850 }
   ],
   memorialApplications: [
     { id: 'MEM-501', name: 'Олена Майоренко (дружина)', phone: '+380671112233', heroName: 'Майоренко Олексій «Орел»', brigade: '72 ОМБр', details: 'Бажаю додати історію чоловіка на Стіну Пам\'яті та долучитися до програми підтримки родин', date: '05.07.2026', status: 'approved', statusLabel: '🟢 Додано в Пантеон' },
     { id: 'MEM-502', name: 'Дмитро (побратим)', phone: '+380509988771', heroName: 'Ткаченко Микола «Батько»', brigade: '93 ОМБр «Холодний Яр»', details: 'Загинув під Кліщіївкою, маємо фото та виписку нагород', date: '04.07.2026', status: 'review', statusLabel: '🟡 Перевірка документів' }
   ],
   auctionLots: [
-    { id: 'auc_1', title: '🇺🇦 Бойовий Прапор з особистим підписом Кирила Буданова', type: 'raffle', typeLabel: '🎟️ Благодійна Лотерея', desc: 'Ексклюзивний прапор України з автографом начальника ГУР МО Кирила Буданова. Всі кошти йдуть на нічні дрони з тепловізорами для розвідників!', image: 'media__1782942639584.png', ticketPrice: 200, currentBid: 0, targetAmount: 500000, collectedAmount: 410000, totalTickets: 2050, topBidder: '-', endTime: '15 липня 2026', status: 'active' },
-    { id: 'auc_2', title: '🥊 Боксерська рукавичка з автографом Олександра Усика', type: 'raffle', typeLabel: '🎟️ Благодійна Лотерея', desc: 'Оригінальна боксерська рукавичка Абсолютного чемпіона світу Олександра Усика. 1 білет = 300 грн. Більше донат = більше шансів!', image: 'media__1782942624904.png', ticketPrice: 300, currentBid: 0, targetAmount: 300000, collectedAmount: 240000, totalTickets: 800, topBidder: '-', endTime: '20 липня 2026', status: 'active' },
-    { id: 'auc_3', title: '🚀 Відстріляний тубус від NLAW з розписом бійців 3 ОШБр', type: 'auction', typeLabel: '🔨 Відкритий Аукціон', desc: 'Легендарний трофей з-під Бахмута, перетворений на арт-об\'єкт військовими художниками. Перемагає найвища ставка!', image: 'media__1783040943180.jpg', ticketPrice: 0, currentBid: 45000, targetAmount: 100000, collectedAmount: 45000, totalTickets: 0, topBidder: 'Меценат Alex_K', endTime: '18 липня 2026', status: 'active' }
+    { id: 'auc_1', title: '🇺🇦 Бойовий Прапор з особистим підписом Кирила Буданова', type: 'raffle', typeLabel: '🎟️ Благодійна Лотерея', desc: 'Ексклюзивний прапор України з автографом начальника ГУР МО Кирила Буданова. Всі кошти йдуть на нічні дрони з тепловізорами для розвідників!', image: 'hero.png', ticketPrice: 200, currentBid: 0, targetAmount: 500000, collectedAmount: 410000, totalTickets: 2050, topBidder: '-', endTime: '15 липня 2026', status: 'active' },
+    { id: 'auc_2', title: '🥊 Боксерська рукавичка з автографом Олександра Усика', type: 'raffle', typeLabel: '🎟️ Благодійна Лотерея', desc: 'Оригінальна боксерська рукавичка Абсолютного чемпіона світу Олександра Усика. 1 білет = 300 грн. Більше донат = більше шансів!', image: 'honor_patron.jpg', ticketPrice: 300, currentBid: 0, targetAmount: 300000, collectedAmount: 240000, totalTickets: 800, topBidder: '-', endTime: '20 липня 2026', status: 'active' },
+    { id: 'auc_3', title: '🚀 Відстріляний тубус від NLAW з розписом бійців 3 ОШБр', type: 'auction', typeLabel: '🔨 Відкритий Аукціон', desc: 'Легендарний трофей з-під Бахмута, перетворений на арт-об\'єкт військовими художниками. Перемагає найвища ставка!', image: 'honor_logistics.jpg', ticketPrice: 0, currentBid: 45000, targetAmount: 100000, collectedAmount: 45000, totalTickets: 0, topBidder: 'Меценат Alex_K', endTime: '18 липня 2026', status: 'active' }
   ],
   auctionTransactions: [
     { id: 'TRX-701', lotId: 'auc_1', lotTitle: '🇺🇦 Прапор від Кирила Буданова', participant: 'Марина Бондаренко', phone: '+380631122334', amount: '2 000 ₴', ticketsCount: '10 білетів', date: '05.07.2026', type: '🎟️ Лотерея' },
@@ -553,9 +579,9 @@ const INITIAL_DATA = {
     { id: 'BLD-103', name: 'Максим Меценат', city: 'Дніпро', bloodGroup: 'AB(IV) Rh+', phone: '+380634445566', status: 'active', date: '04.07.2026', donationsCount: 2 }
   ],
   animals: [
-    { id: 'PET-1', name: 'Патрон (Вівчарка К-9)', type: 'Службовий пес-розшуківець', zone: 'Покровський напрямок', age: '3 роки', desc: 'Евакуйований під обстрілом. Вміє виявляти міни-пелюстки. Потребує тактичних окулярів та розвантажувального жилета.', needAmount: 18500, collected: 14200, status: 'urgent', img: 'media__1783040943180.jpg' },
-    { id: 'PET-2', name: 'Бахмут (Кіт-талісман)', type: 'Окопний котик-мишолов', zone: 'Часів Яр', age: '1.5 роки', desc: 'Врятований бійцями 93-ї ОМБр з палаючого будинку. Шукає люблячу родину в Києві або Львові!', needAmount: 6500, collected: 6500, status: 'adopted', img: 'media__1783040943180.jpg' },
-    { id: 'PET-3', name: 'Рекс (Саперна собака)', type: 'К-9 ДСНС', zone: 'Харківщина', age: '4 роки', desc: 'Отримав легку контузію під час розмінування. Проходить реабілітацію у ветклініці фонду. Потребує лікувального корму.', needAmount: 24000, collected: 9800, status: 'rehab', img: 'media__1783040943180.jpg' }
+    { id: 'PET-1', name: 'Патрон (Вівчарка К-9)', type: 'Службовий пес-розшуківець', zone: 'Покровський напрямок', age: '3 роки', desc: 'Евакуйований під обстрілом. Вміє виявляти міни-пелюстки. Потребує тактичних окулярів та розвантажувального жилета.', needAmount: 18500, collected: 14200, status: 'urgent', img: 'hero.png' },
+    { id: 'PET-2', name: 'Бахмут (Кіт-талісман)', type: 'Окопний котик-мишолов', zone: 'Часів Яр', age: '1.5 роки', desc: 'Врятований бійцями 93-ї ОМБр з палаючого будинку. Шукає люблячу родину в Києві або Львові!', needAmount: 6500, collected: 6500, status: 'adopted', img: 'work_kids_toys.jpg' },
+    { id: 'PET-3', name: 'Рекс (Саперна собака)', type: 'К-9 ДСНС', zone: 'Харківщина', age: '4 роки', desc: 'Отримав легку контузію під час розмінування. Проходить реабілітацію у ветклініці фонду. Потребує лікувального корму.', needAmount: 24000, collected: 9800, status: 'rehab', img: 'work_medical_aid.jpg' }
   ],
   legalRequests: [
     { id: 'LEG-1', soldier: 'Олександр Т.', unit: 'А1302 (93 ОМБр)', category: 'Оформлення УБД', phone: '+380971234567', date: '06.07.2026', status: 'in_progress', statusLabel: '🟡 В роботі адвоката', notes: 'Запит на генерацію рапорту та збір довідок з госпіталю' },
@@ -583,27 +609,27 @@ const INITIAL_DATA = {
     ]
   },
   ecoProjects: [
-    { id: 'ECO-1', title: 'Роботизований комплекс розмінування "Скіф-М"', region: 'Херсонщина (Аграрний сектор)', needAmount: 450000, collected: 320000, desc: 'Закупівля важкого дрона-міношукача та дистанційної фрези для очищення посівних полів від протипіхотних мін та залишків касетних боєприпасів.', status: 'active', img: 'media__1783040943180.jpg' },
-    { id: 'ECO-2', title: 'Відродження Серебрянського Лісу (10,000 саджанців)', region: 'Луганщина / Донеччина', needAmount: 150000, collected: 150000, desc: 'Висадка стійких до посухи дубів та сосен на місці випалених бойовими діями лісових масивів. Спільна програма з екологами України.', status: 'completed', img: 'media__1783040943180.jpg' },
-    { id: 'ECO-3', title: 'Мобільна лабораторія аналізу води та ґрунтів', region: 'Миколаївська область', needAmount: 280000, collected: 95000, desc: 'Експрес-діагностика питної води в прифронтових селах на вміст важких металів та порохових залишків.', status: 'active', img: 'media__1783040943180.jpg' }
+    { id: 'ECO-1', title: 'Роботизований комплекс розмінування "Скіф-М"', region: 'Херсонщина (Аграрний сектор)', needAmount: 450000, collected: 320000, desc: 'Закупівля важкого дрона-міношукача та дистанційної фрези для очищення посівних полів від протипіхотних мін та залишків касетних боєприпасів.', status: 'active', img: 'drone.png' },
+    { id: 'ECO-2', title: 'Відродження Серебрянського Лісу (10,000 саджанців)', region: 'Луганщина / Донеччина', needAmount: 150000, collected: 150000, desc: 'Висадка стійких до посухи дубів та сосен на місці випалених бойовими діями лісових масивів. Спільна програма з екологами України.', status: 'completed', img: 'work_baby_food.jpg' },
+    { id: 'ECO-3', title: 'Мобільна лабораторія аналізу води та ґрунтів', region: 'Миколаївська область', needAmount: 280000, collected: 95000, desc: 'Експрес-діагностика питної води в прифронтових селах на вміст важких металів та порохових залишків.', status: 'active', img: 'work_medical_aid.jpg' }
   ],
   childrenRequests: [
     { id: 'KID-1', childName: 'Остап (10 років)', parentInfo: 'Син полеглого Героя 93-ї ОМБр', city: 'Бахмут / Київ', requestType: 'Ноутбук для школи', date: '06.07.2026', status: 'in_progress', statusLabel: '🟡 В процесі закупівлі', notes: 'Потрібен ноутбук для дистанційного навчання та курсів програмування' },
     { id: 'KID-2', childName: 'Софія (14 років)', parentInfo: 'Донька ветерана з інвалідністю', city: 'Харків', requestType: 'Путівка в кемп "Горизонт"', date: '05.07.2026', status: 'approved', statusLabel: '🟢 Путівку надано', notes: 'Зміна в Карпатах з 15 по 28 липня, оплачено фондом' }
   ],
   energyProjects: [
-    { id: 'ENG-1', title: 'Дизель-генератор 50 кВт для прифронтового шпиталю', region: 'Запорізька область', needAmount: 380000, collected: 290000, desc: 'Забезпечення безперебійного живлення реанімації та операційних під час зимових блекаутів.', status: 'active', img: 'media__1783040943183.jpg' },
-    { id: 'ENG-2', title: '15 терміналів Starlink v3 + авто-адаптери', region: 'Донецький напрямок (Авдіївка/Покровськ)', needAmount: 300000, collected: 300000, desc: 'Супутниковий шифрований зв\'язок для командних пунктів та розрахунків БПЛА.', status: 'completed', img: 'media__1783040943180.jpg' },
-    { id: 'ENG-3', title: 'Зарядні станції EcoFlow Delta Pro (5 шт)', region: 'Харківщина (Мобільні ППО)', needAmount: 450000, collected: 120000, desc: 'Живлення прожекторів та радіолокаційних планшетів мисливців за шахедами.', status: 'active', img: 'media__1783040943186.jpg' }
+    { id: 'ENG-1', title: 'Дизель-генератор 50 кВт для прифронтового шпиталю', region: 'Запорізька область', needAmount: 380000, collected: 290000, desc: 'Забезпечення безперебійного живлення реанімації та операційних під час зимових блекаутів.', status: 'active', img: 'work_hospital_ward.jpg' },
+    { id: 'ENG-2', title: '15 терміналів Starlink v3 + авто-адаптери', region: 'Донецький напрямок (Авдіївка/Покровськ)', needAmount: 300000, collected: 300000, desc: 'Супутниковий шифрований зв\'язок для командних пунктів та розрахунків БПЛА.', status: 'completed', img: 'drone.png' },
+    { id: 'ENG-3', title: 'Зарядні станції EcoFlow Delta Pro (5 шт)', region: 'Харківщина (Мобільні ППО)', needAmount: 450000, collected: 120000, desc: 'Живлення прожекторів та радіолокаційних планшетів мисливців за шахедами.', status: 'active', img: 'hero.png' }
   ],
   veteranBusinesses: [
-    { id: 'VET-1', brand: '☕ "Кава Кіборгів" (Ветеранська Ростерія)', founder: 'Олександр "Титан" (Ветеран 95-ї ОДШБр)', city: 'Житомир', grantAmount: 150000, desc: 'Крафтове обсмажування кави. Частина прибутку йде на дрони для рідної бригади.', category: 'Кава та пекарні', status: 'active', img: 'media__1783040943196.jpg' },
-    { id: 'VET-2', brand: '🍯 "Мед Перемоги" (Пасіка ветерана)', founder: 'Микола Петренко (Ветеран-сапер)', city: 'Полтавщина', grantAmount: 100000, desc: 'Екологічно чистий липовий та гречаний мед з Полтавщини. Подарункові набори.', category: 'Крафтові продукти', status: 'active', img: 'media__1783040943183.jpg' },
-    { id: 'VET-3', brand: '🛠️ СТО "Бронювання та Ремонт 4x4"', founder: 'Брати Бойко (Ветерани ТрО)', city: 'Дніпро', grantAmount: 250000, desc: 'Ремонт та підготовка пікапів і позашляховиків для фронтових підрозділів.', category: 'Автосервіс та СТО', status: 'completed', img: 'media__1783040943180.jpg' }
+    { id: 'VET-1', brand: '☕ "Кава Кіборгів" (Ветеранська Ростерія)', founder: 'Олександр "Титан" (Ветеран 95-ї ОДШБр)', city: 'Житомир', grantAmount: 150000, desc: 'Крафтове обсмажування кави. Частина прибутку йде на дрони для рідної бригади.', category: 'Кава та пекарні', status: 'active', img: 'honor_patron.jpg' },
+    { id: 'VET-2', brand: '🍯 "Мед Перемоги" (Пасіка ветерана)', founder: 'Микола Петренко (Ветеран-сапер)', city: 'Полтавщина', grantAmount: 100000, desc: 'Екологічно чистий липовий та гречаний мед з Полтавщини. Подарункові набори.', category: 'Крафтові продукти', status: 'active', img: 'work_baby_food.jpg' },
+    { id: 'VET-3', brand: '🛠️ СТО "Бронювання та Ремонт 4x4"', founder: 'Брати Бойко (Ветерани ТрО)', city: 'Дніпро', grantAmount: 250000, desc: 'Ремонт та підготовка пікапів і позашляховиків для фронтових підрозділів.', category: 'Автосервіс та СТО', status: 'completed', img: 'honor_cargo.jpg' }
   ],
   mobileHospitals: [
-    { id: 'HOSP-1', title: 'Мобільний стоматологічний кабінет на базі автобуса', region: 'Слов\'янськ / Краматорськ', needAmount: 650000, collected: 480000, desc: 'Повноцінне стоматологічне обладнання, рентген та генератор для лікування бійців на нулі.', status: 'active', img: 'media__1783040943246.jpg' },
-    { id: 'HOSP-2', title: 'Броньований евакуаційний реанімобіль Pinzgauer', region: 'Куп\'янський напрямок', needAmount: 850000, collected: 850000, desc: 'Вивіз важкопоранених бійців під ворожим обстрілом по бездоріжжю з підтримкою ШВЛ.', status: 'completed', img: 'media__1783040943180.jpg' }
+    { id: 'HOSP-1', title: 'Мобільний стоматологічний кабінет на базі автобуса', region: 'Слов\'янськ / Краматорськ', needAmount: 650000, collected: 480000, desc: 'Повноцінне стоматологічне обладнання, рентген та генератор для лікування бійців на нулі.', status: 'active', img: 'work_hospital_ward.jpg' },
+    { id: 'HOSP-2', title: 'Броньований евакуаційний реанімобіль Pinzgauer', region: 'Куп\'янський напрямок', needAmount: 850000, collected: 850000, desc: 'Вивіз важкопоранених бійців під ворожим обстрілом по бездоріжжю з підтримкою ШВЛ.', status: 'completed', img: 'med.png' }
   ]
 };
 window.FoundationStore = {
@@ -611,12 +637,12 @@ window.FoundationStore = {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) {
-        this.saveData(INITIAL_DATA);
-        return JSON.parse(JSON.stringify(INITIAL_DATA));
+        this.saveData(normalizeAssetPaths(INITIAL_DATA));
+        return normalizeAssetPaths(JSON.parse(JSON.stringify(INITIAL_DATA)));
       }
-      return JSON.parse(raw);
+      return normalizeAssetPaths(JSON.parse(raw));
     } catch (e) {
-      return JSON.parse(JSON.stringify(INITIAL_DATA));
+      return normalizeAssetPaths(JSON.parse(JSON.stringify(INITIAL_DATA)));
     }
   },
 
@@ -1453,6 +1479,7 @@ window.FoundationStore = {
       this.saveData(data);
     }
   },
+  deleteChildRequest(id) {
     const data = this.getData();
     if (data.childrenRequests) {
       data.childrenRequests = data.childrenRequests.filter(c => c.id !== id);
@@ -1491,7 +1518,7 @@ window.FoundationStore = {
     if (!data.veteranBusinesses) data.veteranBusinesses = [];
     const id = 'VET-' + Math.floor(100 + Math.random() * 900);
     data.veteranBusinesses.unshift({
-      id, brand, founder, city, grantAmount: 150000, desc, category, status: 'active', img: 'media__1783040943196.jpg'
+      id, brand, founder, city, grantAmount: 150000, desc, category, status: 'active', img: 'honor_patron.jpg'
     });
     this.saveData(data);
     return id;
@@ -1558,6 +1585,8 @@ if (typeof window !== 'undefined') {
 // === УНІВЕРСАЛЬНИЙ ВІДЖЕТ AI-КОНСУЛЬТАНТА ТА LIVE-ЧАТУ (Бот Титан 🇺🇦) ===
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('script[src*="ai_widget.js"]')) return;
+    if (window.location.pathname.endsWith('/admin.html') || window.location.pathname.endsWith('admin.html')) return;
     // Do not inject on admin login screen if desired, but good everywhere
     if (document.getElementById('aiTitanWidgetContainer')) return;
 

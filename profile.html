@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="index.css">
   <style>
     .profile-hero {
-      background: linear-gradient(135deg, rgba(7, 14, 30, 0.95) 0%, rgba(50, 40, 10, 0.9) 100%), url('media__1783040943180.jpg') center/cover no-repeat;
+      background: linear-gradient(135deg, rgba(7, 14, 30, 0.95) 0%, rgba(50, 40, 10, 0.9) 100%), url('hero.png') center/cover no-repeat;
       padding: 90px 0 60px;
       text-align: center;
       border-bottom: 1px solid var(--border-color);
@@ -145,7 +145,7 @@
             </div>
             <div style="background: rgba(0,0,0,0.4); padding: 18px; border-radius: 18px; margin-bottom: 14px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
               <span style="color: #aaa;">Дронів для фронту:</span>
-              <strong id="statDrones" style="color: #10b981; font-size: 1.3rem;">8 шт.</strong>
+              <strong id="statDrones" style="color: #10b981; font-size: 1.3rem;">8 С€С‚.</strong>
             </div>
             <div style="background: rgba(0,0,0,0.4); padding: 18px; border-radius: 18px; margin-bottom: 24px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
               <span style="color: #aaa;">Здано крові для бійців:</span>
@@ -268,7 +268,7 @@
       document.getElementById('certName').textContent = p.name;
 
       document.getElementById('statDonated').textContent = p.totalDonated.toLocaleString('uk-UA') + ' ₴';
-      document.getElementById('statDrones').textContent = p.dronesSponsored + ' шт.';
+      document.getElementById('statDrones').textContent = p.dronesSponsored + ' С€С‚.';
       document.getElementById('statBlood').textContent = p.bloodDonatedLiters + ' л.';
 
       // Badges

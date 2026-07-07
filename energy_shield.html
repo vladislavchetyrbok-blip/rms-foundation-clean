@@ -12,7 +12,7 @@
       position: relative;
       padding: 100px 20px 60px;
       text-align: center;
-      background: radial-gradient(circle at 50% 30%, rgba(245, 158, 11, 0.15) 0%, rgba(7, 14, 30, 0.95) 70%), url('media__1783040943183.jpg') center/cover;
+      background: radial-gradient(circle at 50% 30%, rgba(245, 158, 11, 0.15) 0%, rgba(7, 14, 30, 0.95) 70%), url('work_hospital_ward.jpg') center/cover;
       border-bottom: 2px solid rgba(245, 158, 11, 0.3);
       overflow: hidden;
     }
@@ -292,7 +292,7 @@
         const isComp = p.status === 'completed';
         return `
           <div class="project-card">
-            <div class="project-img" style="background-image: url('${p.img || 'media__1783040943183.jpg'}');">
+            <div class="project-img" style="background-image: url('${p.img || 'work_hospital_ward.jpg'}');">
               <span class="project-status ${isComp ? 'status-completed' : 'status-active'}">${isComp ? '🟢 Профінансовано' : '🟡 Триває збір'}</span>
             </div>
             <div class="project-body">

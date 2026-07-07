@@ -446,7 +446,11 @@ function openModalForCamp(id) {
 // === Modal Window ===
 function openModal() {
   const m = document.getElementById('donationModal');
-  if (m) m.classList.add('active');
+  if (!m) return;
+  showModalTab('card');
+  m.classList.add('active');
+  const closeBtn = m.querySelector('.modal-close');
+  if (closeBtn) closeBtn.focus({ preventScroll: true });
 }
 
 function closeModal() {
@@ -459,11 +463,22 @@ function closeModalOutside(e) {
 }
 
 function showModalTab(tabId) {
-  document.getElementById('modalTabCard').style.display = tabId === 'card' ? 'block' : 'none';
-  document.getElementById('modalTabIban').style.display = tabId === 'iban' ? 'block' : 'none';
-  document.getElementById('modalTabCrypto').style.display = tabId === 'crypto' ? 'block' : 'none';
-  const qrEl = document.getElementById('modalTabQr');
-  if (qrEl) qrEl.style.display = tabId === 'qr' ? 'block' : 'none';
+  const panels = {
+    card: document.getElementById('modalTabCard'),
+    iban: document.getElementById('modalTabIban'),
+    crypto: document.getElementById('modalTabCrypto'),
+    qr: document.getElementById('modalTabQr')
+  };
+
+  Object.entries(panels).forEach(([key, el]) => {
+    if (el) el.style.display = key === tabId ? 'block' : 'none';
+  });
+
+  document.querySelectorAll('.modal-tab').forEach(btn => {
+    const isActive = btn.dataset.tab === tabId;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', String(isActive));
+  });
 }
 
 function simulateDonate(method) {
@@ -967,6 +982,7 @@ function handleChatbotQ(id, qText, aText) {
 
 if (typeof window !== 'undefined') {
   window.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('script[src*="ai_widget.js"]')) return;
     setTimeout(initSupportChatbot, 600);
   });
 }
