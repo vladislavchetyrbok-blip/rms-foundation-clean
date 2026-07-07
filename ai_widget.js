@@ -7,8 +7,8 @@
   style.innerHTML = `
     #titanAiButton {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 28px;
+      right: 28px;
       width: 64px;
       height: 64px;
       background: linear-gradient(135deg, #f59e0b, #d97706);
@@ -20,7 +20,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.8rem;
-      z-index: 9999;
+      z-index: 10001;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       animation: titanPulse 3s infinite;
     }
@@ -35,8 +35,8 @@
     }
     #titanAiWidget {
       position: fixed;
-      bottom: 100px;
-      right: 24px;
+      bottom: 105px;
+      right: 28px;
       width: 360px;
       max-width: calc(100vw - 48px);
       height: 520px;
@@ -50,8 +50,27 @@
       display: none;
       flex-direction: column;
       overflow: hidden;
-      z-index: 10000;
+      z-index: 10002;
       font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 768px) {
+      #titanAiButton {
+        bottom: 85px !important;
+        right: 16px !important;
+      }
+      #titanAiWidget {
+        bottom: 160px !important;
+        right: 16px !important;
+        width: calc(100vw - 32px) !important;
+        max-height: 65vh !important;
+      }
+      #rmsPwaBanner {
+        top: 70px !important;
+        bottom: auto !important;
+        left: 16px !important;
+        right: 16px !important;
+        max-width: calc(100vw - 32px) !important;
+      }
     }
     .titan-header {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(15, 28, 63, 0.9));
@@ -810,8 +829,8 @@
   pwaBanner.id = 'rmsPwaBanner';
   pwaBanner.style.cssText = `
     position: fixed;
-    bottom: 95px;
-    left: 24px;
+    top: 75px;
+    right: 28px;
     background: linear-gradient(135deg, rgba(15, 28, 63, 0.95), rgba(7, 14, 30, 0.95));
     border: 2px solid #f59e0b;
     border-radius: 20px;
