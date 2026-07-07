@@ -9,6 +9,15 @@ let currentHonorFilter = 'all';
 let currentCampFilter = 'all';
 let statsAnimated = false;
 
+// Global Debounce Utility
+function debounce(func, wait = 200) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Init i18n
   if (window.I18nStore) {
@@ -52,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 4. Initial Render
   renderAll();
-  animateNumbers();
   initLiveTicker();
 });
 
@@ -449,18 +457,41 @@ function openModal() {
   if (!m) return;
   showModalTab('card');
   m.classList.add('active');
+  document.body.style.overflow = 'hidden';
   const closeBtn = m.querySelector('.modal-close');
   if (closeBtn) closeBtn.focus({ preventScroll: true });
 }
 
 function closeModal() {
   const m = document.getElementById('donationModal');
-  if (m) m.classList.remove('active');
+  if (m) {
+    m.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 }
 
 function closeModalOutside(e) {
   if (e.target.id === 'donationModal') closeModal();
 }
+
+// Modal Keyboard Accessibility (Escape to close, Focus Trap)
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  const m = document.getElementById('donationModal');
+  if (m && m.classList.contains('active') && e.key === 'Tab') {
+    const focusable = m.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      last.focus();
+      e.preventDefault();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      first.focus();
+      e.preventDefault();
+    }
+  }
+});
 
 function showModalTab(tabId) {
   const panels = {
@@ -827,10 +858,6 @@ function handleFormSubmit(e) {
 
   e.target.reset();
   showToast('🚀 Вашу заявку успішно надіслано! Перевірте в Адмінці.');
-}
-
-function animateNumbers() {
-  // Triggered via IntersectionObserver in renderStats()
 }
 
 // === Live Support Ticker (Social Proof) ===
