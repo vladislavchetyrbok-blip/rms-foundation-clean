@@ -448,13 +448,16 @@
       </div>
     </div>
     <div class="ai-quick-chips">
+      <button class="ai-chip" type="button" onclick="window.location.href='ai_impact_generator.html'" style="color: #ffb703; border-color: rgba(255,183,3,0.5); font-weight: 800;">📊 ШІ-Сертифікат</button>
       <button class="ai-chip" type="button" onclick="titanAsk('Як працює Калькулятор Впливу?')">🧮 Калькулятор</button>
       <button class="ai-chip" type="button" onclick="titanAsk('Які 1000 модулів є у фонді?')">🌐 1000 Модулів</button>
       <button class="ai-chip" type="button" onclick="titanAsk('Як отримати податкову знижку?')">📜 Податкова</button>
       <button class="ai-chip" type="button" onclick="titanAsk('Як долучитися волонтером?')">🤝 Волонтерство</button>
     </div>
-    <form class="titan-footer" id="titanForm" onsubmit="titanSubmit(event)">
-      <input type="text" id="titanInput" class="titan-input" placeholder="Задайте питання або оберіть тему..." autocomplete="off">
+    <form class="titan-footer" id="titanForm" onsubmit="titanSubmit(event)" style="display: flex; gap: 6px; align-items: center;">
+      <button type="button" id="titanVoiceBtn" class="titan-send" style="background: rgba(56,189,248,0.2); color: #38bdf8; font-size: 1.1rem; padding: 0 10px; border-radius: 12px;" title="Голосовий ввід (Увімкнути мікрофон)" onclick="titanToggleVoice()">🎤</button>
+      <button type="button" id="titanSpeakBtn" class="titan-send" style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 1.1rem; padding: 0 10px; border-radius: 12px;" title="Озвучування відповідей ШІ" onclick="titanToggleSpeak()">🔇</button>
+      <input type="text" id="titanInput" class="titan-input" placeholder="Запитайте або скажіть голосом..." autocomplete="off">
       <button type="submit" class="titan-send">➤</button>
     </form>
   `;
@@ -532,7 +535,90 @@
       bMsg.innerHTML = reply;
       body.appendChild(bMsg);
       body.scrollTop = body.scrollHeight;
+
+      if (window.titanSpeechEnabled && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const cleanText = bMsg.textContent || bMsg.innerText || "";
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'uk-UA';
+        utterance.rate = 1.0;
+        window.speechSynthesis.speak(utterance);
+      }
     }, 500);
+  };
+
+  // --- VOICE & SPEECH SYNTHESIS LOGIC ---
+  window.titanSpeechEnabled = false;
+  window.titanVoiceActive = false;
+
+  window.titanToggleSpeak = function() {
+    window.titanSpeechEnabled = !window.titanSpeechEnabled;
+    const btn = document.getElementById('titanSpeakBtn');
+    if (btn) {
+      btn.textContent = window.titanSpeechEnabled ? '🔊' : '🔇';
+      btn.style.background = window.titanSpeechEnabled ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.06)';
+      btn.style.color = window.titanSpeechEnabled ? '#10b981' : '#94a3b8';
+    }
+    if (window.titanSpeechEnabled && window.speechSynthesis) {
+      const u = new SpeechSynthesisUtterance("Голосове озвучування увімкнено! Я готовий відповідати.");
+      u.lang = 'uk-UA';
+      window.speechSynthesis.speak(u);
+    } else if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  };
+
+  window.titanToggleVoice = function() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Ваш браузер не підтримує розпізнавання мови. Спробуйте Google Chrome або Safari.");
+      return;
+    }
+    const btn = document.getElementById('titanVoiceBtn');
+    if (window.titanVoiceActive) {
+      if (window.titanRecognition) window.titanRecognition.stop();
+      return;
+    }
+    const rec = new SpeechRecognition();
+    rec.lang = 'uk-UA';
+    rec.interimResults = false;
+    rec.maxAlternatives = 1;
+
+    rec.onstart = function() {
+      window.titanVoiceActive = true;
+      if (btn) {
+        btn.style.background = 'rgba(239, 68, 68, 0.4)';
+        btn.style.color = '#ef4444';
+      }
+      document.getElementById('titanInput').placeholder = "🎤 Слухаю вас...";
+    };
+
+    rec.onresult = function(e) {
+      const transcript = e.results[0][0].transcript;
+      document.getElementById('titanInput').value = transcript;
+      window.titanSubmit(new Event('submit'));
+    };
+
+    rec.onerror = function() {
+      window.titanVoiceActive = false;
+      if (btn) {
+        btn.style.background = 'rgba(56,189,248,0.2)';
+        btn.style.color = '#38bdf8';
+      }
+      document.getElementById('titanInput').placeholder = "Запитайте або скажіть голосом...";
+    };
+
+    rec.onend = function() {
+      window.titanVoiceActive = false;
+      if (btn) {
+        btn.style.background = 'rgba(56,189,248,0.2)';
+        btn.style.color = '#38bdf8';
+      }
+      document.getElementById('titanInput').placeholder = "Запитайте або скажіть голосом...";
+    };
+
+    window.titanRecognition = rec;
+    rec.start();
   };
 
   // --- INJECT TOP BAR AND MEGA-MENU OVERLAY ---
