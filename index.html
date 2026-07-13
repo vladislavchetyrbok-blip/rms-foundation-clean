@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
@@ -117,17 +117,17 @@
             <span style="font-size: 1.45rem; filter: drop-shadow(0 0 8px rgba(255,255,255,0.9));">💛</span>
             <span data-i18n="hero_cta_don">Зробити внесок</span>
           </button>
-          <a href="gallery.html" class="btn btn-outline" style="padding: 16px 28px; font-size: 1.05rem; font-weight: 700; border-radius: 35px; background: rgba(255,183,3,0.12); border: 1px solid rgba(255,183,3,0.4); color: #fff;">
+          <a href="#gallery" class="btn btn-outline" style="padding: 16px 28px; font-size: 1.05rem; font-weight: 700; border-radius: 35px; background: rgba(255,183,3,0.15); border: 1px solid var(--accent-gold); color: #fff; text-decoration: none;">
             <span style="font-size: 1.35rem;">📸</span>
-            <span data-i18n="hero_cta_gallery">Архів справ</span>
+            <span>Фотозвіт справ (Фото)</span>
           </a>
-          <a href="#contact" class="btn btn-outline" style="padding: 16px 28px; font-size: 1.05rem; font-weight: 700; border-radius: 35px; background: rgba(30,96,242,0.18); border: 1px solid rgba(96,165,250,0.4); color: #fff;">
+          <a href="#honor" class="btn btn-outline" style="padding: 16px 28px; font-size: 1.05rem; font-weight: 700; border-radius: 35px; background: rgba(234,179,8,0.18); border: 1px solid #eab308; color: #fff; text-decoration: none;">
+            <span style="font-size: 1.35rem;">🌟</span>
+            <span>Дошка Пошани</span>
+          </a>
+          <a href="#contact" class="btn btn-outline" style="padding: 16px 28px; font-size: 1.05rem; font-weight: 700; border-radius: 35px; background: rgba(30,96,242,0.18); border: 1px solid rgba(96,165,250,0.4); color: #fff; text-decoration: none;">
             <span style="font-size: 1.35rem;">🤝</span>
             <span data-i18n="hero_cta_join">Стати волонтером</span>
-          </a>
-          <a href="ai_impact_generator.html" class="btn btn-outline" style="padding: 16px 28px; font-size: 1.05rem; font-weight: 700; border-radius: 35px; background: rgba(56,189,248,0.18); border: 1px solid rgba(56,189,248,0.5); color: #fff; text-decoration: none;">
-            <span style="font-size: 1.35rem;">📊</span>
-            <span>ШІ-Сертифікат Впливу</span>
           </a>
         </div>
       </div>
@@ -186,52 +186,6 @@
     </div>
   </section>
 
-  <!-- 🌟 UPGRADED GAMIFIED IMPACT CALCULATOR SECTION -->
-  <section class="impact-calc-section" id="calc">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge" style="background: rgba(0, 212, 255, 0.15); color: #00d4ff; border-color: rgba(0, 212, 255, 0.4); margin-bottom: 15px;">🧮 100% Прозорість і Конверсія</div>
-        <h2 class="section-title">Ваш Вплив на Перемогу</h2>
-        <p class="section-subtitle">Потягніть інтерактивний повзунок, щоб миттєво побачити, у які життєво необхідні засоби порятунку та технології перетворюється ваша підтримка.</p>
-      </div>
-
-      <div class="impact-calc-box">
-        <div class="impact-slider-header">
-          <span style="font-size: 1.15rem; color: var(--text-muted); font-weight: 600;">Сума вашого внеску:</span>
-          <span class="impact-current-val" id="calcValDisplay">$100 (4 000 ₴)</span>
-        </div>
-
-        <div class="impact-slider-wrap">
-          <input type="range" class="impact-slider" id="impactSlider" min="10" max="5000" step="10" value="100" oninput="updateImpactCalc(this.value)">
-        </div>
-
-        <div class="impact-result-card" id="impactResultCard">
-          <div class="impact-icon-circle" id="impactResIcon">🎒</div>
-          <div class="impact-result-text">
-            <h3 id="impactResTitle">Комплект NATO IFAK + Турнікет CAT</h3>
-            <p id="impactResDesc">Забезпечує бійця на передовій повноцінною індивідуальною тактичною аптечкою для зупинки критичних кровотеч та врятування життя у перші хвилини поранення.</p>
-          </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 35px;">
-          <button class="btn btn-primary" onclick="donateFromImpactCalc()" style="padding: 18px 42px; font-size: 1.15rem; font-weight: 800; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4); background: linear-gradient(135deg, #00d4ff, #1e60f2);">
-            <span>⚡ Підтримати на суму <strong id="calcBtnValTxt">$100</strong></span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mega-Goal Widget -->
-  <section class="section" id="mega-goal" style="padding-top: 0;">
-    <div class="container">
-      <div class="mega-goal-wrap" id="megaGoalContainer">
-        <!-- Dynamically rendered by script.js -->
-      </div>
-    </div>
-  </section>
-
-
   <!-- Urgent Campaigns -->
   <section class="section" id="campaigns">
     <div class="container">
@@ -253,42 +207,13 @@
     </div>
   </section>
 
-  <!-- Frontline Needs Radar -->
-  <section class="section" id="radar" style="background: rgba(13, 24, 50, 0.35);">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge" style="margin-bottom: 12px; background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4);" data-i18n="radar_badge">🎯 РАДАР ПОТРЕБ ПЕРЕДОВОЇ</div>
-        <h2 class="section-title" data-i18n="radar_title">Верифіковані запити від бригад</h2>
-        <p class="section-subtitle" data-i18n="radar_subtitle">Прямий зв'язок з військовими підрозділами та шпиталями. Оберіть конкретний запит та допоможіть його закрити.</p>
-      </div>
-      <div class="radar-grid" id="radarContainer">
-        <!-- Dynamically rendered by script.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Live Impact Map -->
-  <section class="section" id="impact-map">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge" style="margin-bottom: 12px; background: rgba(0, 212, 255, 0.15); color: var(--accent-blue); border: 1px solid var(--accent-blue);" data-i18n="map_badge">🗺️ ЖИВА МАПА ДОПОМОГИ</div>
-        <h2 class="section-title" data-i18n="map_title">Географія нашої присутності</h2>
-        <p class="section-subtitle" data-i18n="map_subtitle">Оберіть прифронтовий регіон, щоб побачити детальний звіт переданого обладнання та підтримки.</p>
-      </div>
-      <div class="impact-map-grid" id="impactMapContainer">
-        <!-- Dynamically rendered by script.js -->
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Photo Gallery / Work Reports -->
+  <!-- Photo Gallery / Work Reports (Фотозвіт справ фонду) -->
   <section class="section" id="gallery" style="background: rgba(15,28,63,0.4); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
     <div class="container">
       <div class="section-header" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px; text-align: left;">
         <div style="max-width: 620px;">
           <div class="badge" style="margin-bottom: 12px; background: rgba(255,183,3,0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold);" data-i18n="gallery_badge">📸 ЖИВА ХРОНІКА ДОПОМОГИ</div>
-          <h2 class="section-title" style="margin-bottom: 10px;" data-i18n="gallery_title">Реальні справи нашого фонду</h2>
+          <h2 class="section-title" style="margin-bottom: 10px;" data-i18n="gallery_title">Реальні справи нашого фонду (Фото)</h2>
           <p class="section-subtitle" style="margin: 0;" data-i18n="gallery_subtitle">Щоденна праця наших волонтерів у лікарнях, прифронтових громадах та на складах. Листайте вбік або натисніть «Показати всі».</p>
         </div>
         <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
@@ -328,53 +253,37 @@
     </div>
   </section>
 
-  <!-- Monthly Patron Club -->
-  <section class="section" id="patron-club">
+  <!-- 🌟 UPGRADED GAMIFIED IMPACT CALCULATOR SECTION -->
+  <section class="impact-calc-section" id="calc">
     <div class="container">
       <div class="section-header">
-        <div class="badge" style="margin-bottom: 12px; background: rgba(255, 183, 3, 0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold);" data-i18n="patron_badge">🏆 КЛУБ ПОСТІЙНИХ МЕЦЕНАТІВ</div>
-        <h2 class="section-title" data-i18n="patron_title">Щомісячна підписка на Перемогу</h2>
-        <p class="section-subtitle" data-i18n="patron_subtitle">Регулярні внески дозволяють фонду планувати закупівлі дронів та аптечок заздалегідь. Оберіть свій Щит підтримки!</p>
+        <div class="badge" style="background: rgba(0, 212, 255, 0.15); color: #00d4ff; border-color: rgba(0, 212, 255, 0.4); margin-bottom: 15px;">🧮 100% Прозорість і Конверсія</div>
+        <h2 class="section-title">Ваш Вплив на Перемогу</h2>
+        <p class="section-subtitle">Потягніть інтерактивний повзунок, щоб миттєво побачити, у які життєво необхідні засоби порятунку та технології перетворюється ваша підтримка.</p>
       </div>
-      <div class="patron-grid" id="patronContainer">
-        <!-- Dynamically rendered by script.js -->
-      </div>
-    </div>
-  </section>
 
-  <!-- Viral Certificate Generator -->
-  <section class="section" id="certificate-gen" style="background: rgba(13, 24, 50, 0.4); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge" style="margin-bottom: 12px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981;" data-i18n="cert_badge">📜 ВІРАЛЬНИЙ СЕРТИФІКАТ</div>
-        <h2 class="section-title" data-i18n="cert_title">Генератор Сертифіката Благодійника</h2>
-        <p class="section-subtitle" data-i18n="cert_subtitle">Введіть своє ім'я або назву компанії, згенеруйте офіційний іменний документ та поділіться ним у соцмережах!</p>
-      </div>
-      <div class="cert-gen-wrap">
-        <div class="cert-form-box">
-          <div>
-            <label style="display: block; font-size: 0.9rem; color: #aaa; margin-bottom: 6px;" data-i18n="cert_name_lbl">Ваше ім'я або назва компанії:</label>
-            <input type="text" id="certInputName" class="cert-input" style="width: 100%;" placeholder="напр. Олександр або ТОВ «Інновації»" oninput="drawCertificate()">
-          </div>
-          <div>
-            <label style="display: block; font-size: 0.9rem; color: #aaa; margin-bottom: 6px;" data-i18n="cert_tier_lbl">Оберіть звання / статус підтримки:</label>
-            <select id="certSelectTier" class="cert-select" style="width: 100%;" onchange="drawCertificate()">
-              <option value="sky" data-i18n="cert_tier_1">🛡️ Захисник Неба (Дрони та РЕБ)</option>
-              <option value="med" data-i18n="cert_tier_2">🏥 Ангел Медицини (Тактична медицина)</option>
-              <option value="patron" data-i18n="cert_tier_3">🌟 Почесний Меценат фонду</option>
-            </select>
-          </div>
-          <div style="display: flex; gap: 14px; margin-top: 10px;">
-            <button class="btn btn-primary" style="flex: 1; padding: 14px;" onclick="drawCertificate()">
-              <span data-i18n="cert_btn_gen">⚡ Згенерувати Сертифікат</span>
-            </button>
-            <button class="btn btn-outline" style="padding: 14px 24px;" onclick="downloadCertificate()">
-              <span data-i18n="cert_btn_dl">💾 Завантажити PNG</span>
-            </button>
+      <div class="impact-calc-box">
+        <div class="impact-slider-header">
+          <span style="font-size: 1.15rem; color: var(--text-muted); font-weight: 600;">Сума вашого внеску:</span>
+          <span class="impact-current-val" id="calcValDisplay">$100 (4 000 ₴)</span>
+        </div>
+
+        <div class="impact-slider-wrap">
+          <input type="range" class="impact-slider" id="impactSlider" min="10" max="5000" step="10" value="100" oninput="updateImpactCalc(this.value)">
+        </div>
+
+        <div class="impact-result-card" id="impactResultCard">
+          <div class="impact-icon-circle" id="impactResIcon">🎒</div>
+          <div class="impact-result-text">
+            <h3 id="impactResTitle">Комплект NATO IFAK + Турнікет CAT</h3>
+            <p id="impactResDesc">Забезпечує бійця на передовій повноцінною індивідуальною тактичною аптечкою для зупинки критичних кровотеч та врятування життя у перші хвилини поранення.</p>
           </div>
         </div>
-        <div class="cert-canvas-wrap">
-          <canvas id="certCanvas" width="800" height="560"></canvas>
+
+        <div style="text-align: center; margin-top: 35px;">
+          <button class="btn btn-primary" onclick="donateFromImpactCalc()" style="padding: 18px 42px; font-size: 1.15rem; font-weight: 800; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4); background: linear-gradient(135deg, #00d4ff, #1e60f2);">
+            <span>⚡ Підтримати на суму <strong id="calcBtnValTxt">$100</strong></span>
+          </button>
         </div>
       </div>
     </div>
