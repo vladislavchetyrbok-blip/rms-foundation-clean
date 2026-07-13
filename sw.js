@@ -1,5 +1,5 @@
 // sw.js - Progressive Web App (PWA) Service Worker for RMS Foundation
-const CACHE_NAME = 'rms-foundation-v5';
+const CACHE_NAME = 'rms-foundation-v6';
 const ASSETS_TO_CACHE = [
   './index.html',
   './index.css',
@@ -11,7 +11,9 @@ const ASSETS_TO_CACHE = [
   './favicon.png',
   './hero.png',
   './drone.png',
-  './med.png'
+  './med.png',
+  './honor_defender.jpg',
+  './honor_coordinator.jpg'
 ];
 
 // Install Event - Cache assets

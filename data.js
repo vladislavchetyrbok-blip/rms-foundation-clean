@@ -4,7 +4,7 @@
  * Синхронізує публічний сайт та Адмін-панель через localStorage.
  */
 
-const STORAGE_KEY = 'rms_foundation_data_v5';
+const STORAGE_KEY = 'rms_foundation_data_monobank_clean_v2';
 const ONLINE_BIN_ID = '6a4708aef5f4af5e2957274f';
 const ONLINE_API_KEY = '$2a$10$a.w5fqFGgNDtxm.14mCh3us9zVhiSRK7fng26ppAnKWesY1g.noMe';
 const ASSET_FALLBACKS = {
@@ -43,108 +43,31 @@ const INITIAL_DATA = {
   },
   campaigns: [
     {
-      id: 'fuel_camp_1',
+      id: 'monobank_camp_1',
       title: {
-        uk: 'На паливо для евакуаційних та гуманітарних рейсів',
-        en: 'Fuel for evacuation and humanitarian logistics missions',
-        pl: 'Na paliwo do misji ewakuacyjnych i humanitarnych',
-        ro: 'Combustibil pentru misiuni de evacuare și logistică umanitară',
-        it: 'Carburante per missioni di evacuazione e logistica umanitaria',
-        de: 'Treibstoff für Evakuierungs- und humanitäre Logistikmissionen'
+        uk: '🎯 Головний збір на Monobank: 5 нічних дронів Mavic 3T, системи РЕБ та тактична медицина',
+        en: '🎯 Main Monobank Fundraiser: 5 Night-Vision Mavic 3T Drones, EW systems & Tactical Medicine',
+        pl: '🎯 Główna zbiórka Monobank: 5 dronów noktowizyjnych Mavic 3T, systemy WRE i medycyna taktyczna',
+        ro: '🎯 Colectare principală Monobank: 5 drone Mavic 3T, sisteme EW și medicină tactică',
+        it: '🎯 Raccolta fondi principale Monobank: 5 droni Mavic 3T, sistemi EW e medicina tattica',
+        de: '🎯 Hauptspendenaktion Monobank: 5 Mavic 3T Drohnen, EloKa-Systeme & Taktische Medizin'
       },
       desc: {
-        uk: 'Терміновий збір на пальне для доставляння ліків, продуктів, реабілітаційного обладнання до шпиталів та евакуації людей з прифронтових зон.',
-        en: 'Urgent fundraiser for fuel to deliver medicine, food, and rehabilitation equipment to hospitals and evacuate civilians.',
-        pl: 'Pilna zbiórka na paliwo do dostarczania leków, żywności i sprzętu do szpitali oraz ewakuacji ludności.',
-        ro: 'Strângere urgentă de fonduri pentru combustibil destinat livrării de medicamente și evacuării civililor.',
-        it: 'Raccolta fondi urgente per il carburante per consegnare medicine e attrezzature agli ospedali.',
-        de: 'Dringende Spendenaktion für Treibstoff zur Lieferung von Medizin und Ausrüstung an Krankenhäuser.'
+        uk: 'Офіційна монобанка фонду для комплексного забезпечення передових підрозділів ЗСУ: закупівля квадрокоптерів із тепловізійною оптикою для нічної розвідки, мобільних куполів РЕБ для захисту від ворожих FPV-дронів та сертифікованих кровоспинних турнікетів CAT 7-ї генерації.',
+        en: 'Official Monobank jar for comprehensive frontline support: purchasing night reconnaissance thermal drones, portable anti-FPV EW domes, and certified CAT 7th gen tourniquets for military medics.',
+        pl: 'Oficjalna skarbonka Monobank do kompleksowego wsparcia frontu: drony termowizyjne, kopuły WRE i stazy taktyczne CAT 7.',
+        ro: 'Cont oficial Monobank pentru suport pe linia întâi: drone termice de recunoaștere, sisteme portabile EW și garouri CAT 7.',
+        it: 'Raccolta ufficiale Monobank per il supporto in prima linea: droni termici notturni, cupole EW anti-FPV e lacci emostatici CAT 7.',
+        de: 'Offizielle Monobank-Spendenaktion für die Front: Wärmebilddrohnen für die Nachtaufklärung, mobile EloKa-Kugeln und CAT 7 Tourniquets.'
       },
-      target: 100000,
-      collected: 68400,
-      category: 'auto',
-      icon: '⛽',
-      jarUrl: 'https://send.monobank.ua/jar/6iL3oH5Vde',
-      cardNum: '4874 1000 3862 9211',
-      urgent: true
-    },
-    {
-      id: 'drones_camp_2',
-      title: {
-        uk: '5 нічних дронів Mavic 3T та системи окопного РЕБ',
-        en: '5 night-vision Mavic 3T drones and trench EW systems',
-        pl: '5 dronów noktowizyjnych Mavic 3T i systemy WRE',
-        ro: '5 drone cu vedere pe timp de noapte Mavic 3T și sisteme EW',
-        it: '5 droni per visione notturna Mavic 3T e sistemi di guerra elettronica',
-        de: '5 Nachtsichtdrohnen Mavic 3T und Graben-EloKa-Systeme'
-      },
-      desc: {
-        uk: 'Комплексний збір для передових підрозділів на Донеччині: дрони з тепловізорами для нічної розвідки та мобільні куполи РЕБ для захисту від ворожих FPV.',
-        en: 'Comprehensive fundraiser for frontline units in Donetsk region: thermal drones for night recon and portable EW domes against enemy FPVs.',
-        pl: 'Zbiórka dla jednostek na frontie w Donbasie: drony termowizyjne do zwiadu nocnego i mobilne kopuły WRE.',
-        ro: 'Strângere de fonduri pentru unitățile din linia întâi: drone termice și sisteme portabile de protecție împotriva dronelor FPV.',
-        it: 'Raccolta fondi per le unità in prima linea: droni termici per la ricognizione notturna e cupole di protezione EW.',
-        de: 'Spendenaktion für Fronteinheiten: Wärmebilddrohnen für die Nachtaufklärung und mobile EloKa-Schutzkugeln.'
-      },
-      target: 450000,
-      collected: 312000,
+      target: 1000000,
+      collected: 684500,
       category: 'drones',
-      icon: '🛸',
+      icon: '⚡',
       jarUrl: 'https://send.monobank.ua/jar/6iL3oH5Vde',
       cardNum: '4874 1000 3862 9211',
-      urgent: true
-    },
-    {
-      id: 'med_camp_3',
-      title: {
-        uk: 'Тактична медицина: 200 аптечок IFAK та опікові пов\'язки',
-        en: 'Tactical medicine: 200 IFAK kits and burn dressings',
-        pl: 'Medycyna taktyczna: 200 apteczek IFAK i opatrunki na oparzenia',
-        ro: 'Medicină tactică: 200 truse IFAK și pansamente pentru arsuri',
-        it: 'Medicina tattica: 200 kit IFAK e medicazioni per ustioni',
-        de: 'Taktische Medizin: 200 IFAK-Kits und Verbände für Verbrennungen'
-      },
-      desc: {
-        uk: 'Забезпечуємо військових медиків та стабілізаційні пункти якісними турнікетами, гемостатиками та гідroгелевими опіковими пов\'язками.',
-        en: 'Providing military medics and stabilization points with high-quality tourniquets, hemostatics, and hydrogel burn dressings.',
-        pl: 'Zaopatrujemy medyków wojskowych w stazy taktyczne, środki hemostatyczne i opatrunki hydrożelowe.',
-        ro: 'Asigurăm medicilor militari garouri de calitate, hemostatice și pansamente hidrogel pentru arsuri.',
-        it: 'Forniamo ai medici militari lacci emostatici di qualità e medicazioni idrogel per ustioni.',
-        de: 'Wir versorgen Militärärzte mit hochwertigen Tourniquets, Hämostatika und Hydrogel-Brandverbänden.'
-      },
-      target: 250000,
-      collected: 184500,
-      category: 'med',
-      icon: '🏥',
-      jarUrl: 'https://send.monobank.ua/jar/6iL3oH5Vde',
-      cardNum: '4874 1000 3862 9211',
-      urgent: false
-    },
-    {
-      id: 'auto_camp_4',
-      title: {
-        uk: 'Ремонт та гуманітарна підготовка евакуаційного пікапа',
-        en: 'Repair and preparation of evacuation pickup truck',
-        pl: 'Remont i przygotowanie pikapa ewakuacyjnego',
-        ro: 'Reparația și pregătirea camionetei de evacuare',
-        it: 'Riparazione e preparazione del pick-up di evacuazione',
-        de: 'Reparatur und Vorbereitung des Evakuierungs-Pickups'
-      },
-      desc: {
-        uk: 'Капітальний ремонт ходової частини, заміна гуми на болотяну (Mud-Terrain) та маскувальне фарбування для безпечного вивозу поранених.',
-        en: 'Suspension overhaul, Mud-Terrain tires replacement, and camouflage painting for safe medical evacuation.',
-        pl: 'Remont zawieszenia, wymiana opon na terenowe i malowanie maskujące dla bezpiecznej ewakuacji.',
-        ro: 'Reparația suspensiei, înlocuirea anvelopelor și vopsire de camuflaj pentru evacuarea în siguranță.',
-        it: 'Revisione delle sospensioni, sostituzione pneumatici e verniciatura mimetica per un\'evacuazione sicura.',
-        de: 'Fahrwerksüberholung, Geländereifen und Tarnlackierung für sichere Evakuierungsfahrten.'
-      },
-      target: 180000,
-      collected: 142000,
-      category: 'auto',
-      icon: '🚙',
-      jarUrl: 'https://send.monobank.ua/jar/6iL3oH5Vde',
-      cardNum: '4874 1000 3862 9211',
-      urgent: false
+      urgent: true,
+      image: 'drone.png'
     }
   ],
   news: [
@@ -219,6 +142,30 @@ const INITIAL_DATA = {
       desc: 'Особисто доставляє дрони, системи РЕБ та медицину підрозділам у найгарячіших точках фронту.'
     },
     {
+      id: 'hb_defender',
+      name: 'Володимир «Херсон»',
+      role: 'Командир підрозділу, Захисник України',
+      contribution: 'Захист Південного напрямку',
+      category: 'volunteer',
+      badge: 'Герой передової',
+      badgeClass: 'badge-gold',
+      icon: '🔱',
+      image: 'honor_defender.jpg',
+      desc: 'Захищає країну на передовій та координує пряме постачання дронів і тактичної медицини бійцям.'
+    },
+    {
+      id: 'hb_coordinator',
+      name: 'Олександр Мельник',
+      role: 'Стратегічний партнер та меценат',
+      contribution: '1 200 000 ₴',
+      category: 'donor',
+      badge: 'Почесний меценат',
+      badgeClass: 'badge-blue',
+      icon: '🤝',
+      image: 'honor_coordinator.jpg',
+      desc: 'Системно підтримує фонд, закриває ключові збори на нічну розвідку та забезпечує міжнародну логістику.'
+    },
+    {
       id: 'hb_media',
       name: 'Олена Коваленко',
       role: 'Керівниця складу та фоторепортерка',
@@ -253,72 +200,6 @@ const INITIAL_DATA = {
       icon: '🤝',
       image: 'honor_logistics.jpg',
       desc: 'Забезпечує формування та видачу пакунків допомоги вимушеним переселенцям та родинам захисників.'
-    },
-    {
-      id: 'hb_1',
-      name: 'NovaTech Solutions',
-      role: 'IT-корпорація',
-      contribution: '500 000 ₴',
-      category: 'corporate',
-      badge: 'Корпоративний титан',
-      badgeClass: 'badge-gold',
-      icon: '🏢',
-      desc: 'Системний донор нашого фонду, профінансували 5 розвідувальних дронів та 2 позашляховики.'
-    },
-    {
-      id: 'hb_2',
-      name: 'Олександр Кириленко',
-      role: 'Приватний меценат',
-      contribution: '150 000 ₴',
-      category: 'donor',
-      badge: 'Золотий благодійник',
-      badgeClass: 'badge-gold',
-      icon: '🌟',
-      desc: 'Закрив збір на тактичну медицину в критичний момент для батальйону на Донеччині.'
-    },
-    {
-      id: 'hb_3',
-      name: 'Максим Ткаченко та команда',
-      role: 'Координатор логістики',
-      contribution: '1200+ годин роботи',
-      category: 'volunteer',
-      badge: 'Герой волонтерства',
-      badgeClass: 'badge-purple',
-      icon: '🤝',
-      desc: 'Організували безпечну доставку 40+ гуманітарних конвоїв у прифронтові громади Харкова та Сум.'
-    },
-    {
-      id: 'hb_4',
-      name: 'Благодійний забіг «Run for Ukraine»',
-      role: 'Спільнота спортсменів',
-      contribution: '210 000 ₴',
-      category: 'corporate',
-      badge: 'Партнер року',
-      badgeClass: 'badge-blue',
-      icon: '🏃',
-      desc: 'Зібрали кошти під час благодійного марафону на закупівлю мобільних генераторів EcoFlow.'
-    },
-    {
-      id: 'hb_5',
-      name: 'Олена та Марта Бойко',
-      role: 'Благодійниці',
-      contribution: '85 000 ₴',
-      category: 'donor',
-      badge: 'Ангели-охоронці',
-      badgeClass: 'badge-gold',
-      icon: '🕊️',
-      desc: 'Постійна щомісячна підтримка програми медичної реабілітації поранених бійців.'
-    },
-    {
-      id: 'hb_6',
-      name: 'Дмитро «Волонтер» Коваль',
-      role: 'Автомеханік-волонтер',
-      contribution: 'Відремонтовано 28 авто',
-      category: 'volunteer',
-      badge: 'Золоті руки',
-      badgeClass: 'badge-purple',
-      icon: '🔧',
-      desc: 'Безкоштовно ремонтує, бронює та готує пікапи та швидкі допомоги для відправки на нуль.'
     }
   ],
   gallery: [
