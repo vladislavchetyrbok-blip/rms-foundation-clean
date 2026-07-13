@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адмін-панель • Разом ми — сила</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <div class="login-logo">⚡ RMS FOUNDATION</div>
+      <p class="login-subtitle">Централізована панель керування даними сайту</p>
+      <div style="margin-bottom: 20px; text-align: left;">
+        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Пароль доступу:</label>
+        <input type="password" id="adminPassword" placeholder="Введіть пароль (за замовчуванням: admin або 1234)" style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem;">
+      </div>
+      <button class="btn-admin btn-add" style="width: 100%; padding: 14px; font-size: 1rem;" onclick="attemptLogin()">Увійти в панель ➔</button>
+      <div style="margin-top: 16px; font-size: 0.8rem; color: #64748b;">
+        * Всі зміни миттєво зберігаються та синхронізуються через хмару з основним сайтом.
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Wrapper -->
+  <div class="admin-wrapper" id="adminWrapper" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <div class="sidebar-brand">
+            <img src="logo.png" alt="Logo" style="height: 36px; width: auto;">
+            <span>RMS ADMIN</span>
+          </div>
+        </div>
+        <ul class="sidebar-nav">
+          <li class="nav-item active" onclick="switchSection('dashboard', this)">📊 Головна та Статистика</li>
+          <li class="nav-item" onclick="switchSection('campaigns', this)">🔥 Активні збори</li>
+          <li class="nav-item" onclick="switchSection('honor', this)">🌟 Дошка пошани</li>
+          <li class="nav-item" onclick="switchSection('applications', this)">📬 Заявки та Контакти</li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" style="display: block; padding: 10px; color: var(--admin-accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-bottom: 8px;">🌐 Відкрити сайт ➔</a>
+        <button onclick="logoutAdmin()" class="btn-admin btn-del" style="width: 100%;">Вийти з системи</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="topbar">
+        <div>
+          <h1 class="page-title" id="sectionTitleText">Головна та Статистика</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Керування контентом благодійного фонду в реальному часі</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span id="syncStatusBadge" style="background: rgba(16,185,129,0.15); color: var(--admin-green); border: 1px solid rgba(16,185,129,0.3); padding: 8px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">🟢 Хмара синхронізована</span>
+          <button class="btn-admin btn-add" onclick="forceSyncOnline()">🔄 Синхронізувати з хмарою</button>
+        </div>
+      </div>
+
+      <!-- SECTION 1: DASHBOARD & STATS -->
+      <section id="sec-dashboard" class="admin-section">
+        <div class="stats-cards">
+          <div class="stat-card">
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Активних зборів</div>
+            <div class="stat-val" id="statCampCount">1</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Героїв на Дошці пошани</div>
+            <div class="stat-val" id="statHonorCount">9</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Отриманих заявок</div>
+            <div class="stat-val" id="statAppCount">0</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Всього зібрано (₴)</div>
+            <div class="stat-val" id="statTotalCol">14,850,000</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem;">⚡ Головні показники фонду (Числа на головній сторінці)</h3>
+            <button class="btn-admin btn-add" onclick="saveStatsForm()">💾 Зберегти показники</button>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+            <div>
+              <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Загалом зібрано (₴):</label>
+              <input type="number" id="inpStatsTotal" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 1rem;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Передано дронів та авто:</label>
+              <input type="number" id="inpStatsDrones" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 1rem;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Волонтерів та партнерів:</label>
+              <input type="number" id="inpStatsVolunteers" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 1rem;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: CAMPAIGNS -->
+      <section id="sec-campaigns" class="admin-section" style="display: none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem;">🔥 Активні збори</h3>
+            <button class="btn-admin btn-add" onclick="openCampModal()">+ Створити новий збір</button>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Назва збору (UA)</th>
+                  <th>Категорія</th>
+                  <th>Ціль / Зібрано</th>
+                  <th>Реквізити (Monobank / WayForPay)</th>
+                  <th style="text-align: right;">Дії</th>
+                </tr>
+              </thead>
+              <tbody id="campsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: HONOR BOARD -->
+      <section id="sec-honor" class="admin-section" style="display: none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem;">🌟 Дошка пошани (Герої та Меценати)</h3>
+            <button class="btn-admin btn-add" onclick="openHonorModal()">+ Додати героя чи донора</button>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Фото</th>
+                  <th>Ім'я / Команда</th>
+                  <th>Роль</th>
+                  <th>Внесок / Допомога</th>
+                  <th>Бейдж</th>
+                  <th style="text-align: right;">Дії</th>
+                </tr>
+              </thead>
+              <tbody id="honorTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: APPLICATIONS & MESSAGES -->
+      <section id="sec-applications" class="admin-section" style="display: none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem;">📬 Вхідні заявки (Волонтери та Партнери)</h3>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Дата</th>
+                  <th>Ім'я</th>
+                  <th>Телефон / Telegram</th>
+                  <th>Повідомлення</th>
+                  <th style="text-align: right;">Дії</th>
+                </tr>
+              </thead>
+              <tbody id="appsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal: Edit / Add Campaign -->
+  <div id="campModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 6000; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--admin-sidebar); border: 1px solid var(--admin-border); border-radius: 20px; padding: 28px; width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto;">
+      <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.4rem; margin-bottom: 20px;" id="campModalTitle">Редагування збору</h3>
+      <input type="hidden" id="editCampId">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div>
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Назва збору (Українською):</label>
+          <input type="text" id="campInputTitle" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Опис збору (Українською):</label>
+          <textarea id="campInputDesc" rows="3" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;"></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Посилання на Банку Monobank:</label>
+            <input type="text" id="campInputJar" placeholder="https://send.monobank.ua/jar/..." style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Посилання на WayForPay:</label>
+            <input type="text" id="campInputWayForPay" placeholder="https://secure.wayforpay.com/donate/..." style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Номер картки (4874 ...):</label>
+            <input type="text" id="campInputCard" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Приховати прогрес (для зборів без цілі):</label>
+            <select id="campInputHideProgress" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: #0a1329; color: #fff; font-size: 0.95rem;">
+              <option value="true">Так (Приховати цифри і шкалу)</option>
+              <option value="false">Ні (Показувати ціль і зібрано)</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" id="campProgressRow">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Цільова сума (₴):</label>
+            <input type="number" id="campInputTarget" placeholder="Залиште порожнім, якщо без цілі" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Вже зібрано (₴):</label>
+            <input type="number" id="campInputCollected" placeholder="Залиште порожнім, якщо без цілі" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+          <button type="button" class="btn-admin btn-del" onclick="closeModal('campModal')">Скасувати</button>
+          <button type="button" class="btn-admin btn-add" style="padding: 12px 24px;" onclick="saveCampForm()">💾 Зберегти збір</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit / Add Honor Board Hero -->
+  <div id="honorModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 6000; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--admin-sidebar); border: 1px solid var(--admin-border); border-radius: 20px; padding: 28px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto;">
+      <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.4rem; margin-bottom: 20px;" id="honorModalTitle">Додавання героя на Дошку пошани</h3>
+      <input type="hidden" id="editHonorId">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div>
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Ім'я або назва команди:</label>
+          <input type="text" id="honorInputName" placeholder="напр. Володимир «Херсон» або Максим Ткаченко" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Роль / Статус:</label>
+            <input type="text" id="honorInputRole" placeholder="напр. Захисник України або Координатор" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Внесок або допомога:</label>
+            <input type="text" id="honorInputContribution" placeholder="напр. Захист на передовій або 1 200 000 ₴" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Файл фотографії (напр. honor_defender.jpg):</label>
+            <input type="text" id="honorInputImg" placeholder="honor_defender.jpg" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Текст бейджа:</label>
+            <input type="text" id="honorInputBadge" placeholder="напр. Герой фронту або Почесний партнер" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--admin-border); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem;">
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+          <button type="button" class="btn-admin btn-del" onclick="closeModal('honorModal')">Скасувати</button>
+          <button type="button" class="btn-admin btn-add" style="padding: 12px 24px;" onclick="saveHonorForm()">💾 Зберегти героя</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

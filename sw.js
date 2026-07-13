@@ -1,5 +1,5 @@
 // sw.js - Progressive Web App (PWA) Service Worker for RMS Foundation
-const CACHE_NAME = 'rms-foundation-v6';
+const CACHE_NAME = 'rms-foundation-v7';
 const ASSETS_TO_CACHE = [
   './index.html',
   './index.css',
@@ -7,6 +7,9 @@ const ASSETS_TO_CACHE = [
   './data.js',
   './i18n.js',
   './gallery.html',
+  './admin.html',
+  './admin.css',
+  './admin.js',
   './logo.png',
   './favicon.png',
   './hero.png',
