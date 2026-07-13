@@ -1,4 +1,4 @@
-// ai_widget.js - Global AI Assistant Widget "Bot Titan 🇺🇦" for RMS Foundation
+﻿// ai_widget.js - Global AI Assistant Widget "Bot Titan 🇺🇦" for RMS Foundation
 (function() {
   if (typeof window === 'undefined' || document.getElementById('titanAiWidget')) return;
 
@@ -429,7 +429,7 @@
         <span style="font-size: 1.5rem;">🤖</span>
         <div>
           <strong style="color: #fff; font-size: 1rem; display: block;">Бот Титан AI 🇺🇦</strong>
-          <span style="color: #10b981; font-size: 0.78rem; display: flex; align-items: center; gap: 6px;"><span class="live-dot" style="display: inline-block;"></span> Онлайн • 1000 Модулів • Bank-API</span>
+          <span style="color: #10b981; font-size: 0.78rem; display: flex; align-items: center; gap: 6px;"><span class="live-dot" style="display: inline-block;"></span> Онлайн • 6 Ключових Програм • Bank-API</span>
         </div>
       </div>
       <button id="titanCloseBtn" style="background: none; border: none; color: #aaa; font-size: 1.3rem; cursor: pointer;">✕</button>
@@ -450,7 +450,7 @@
     <div class="ai-quick-chips">
       <button class="ai-chip" type="button" onclick="window.location.href='ai_impact_generator.html'" style="color: #ffb703; border-color: rgba(255,183,3,0.5); font-weight: 800;">📊 ШІ-Сертифікат</button>
       <button class="ai-chip" type="button" onclick="titanAsk('Як працює Калькулятор Впливу?')">🧮 Калькулятор</button>
-      <button class="ai-chip" type="button" onclick="titanAsk('Які 1000 модулів є у фонді?')">🌐 1000 Модулів</button>
+      <button class="ai-chip" type="button" onclick="titanAsk('Які ключові програми є у фонді?')">🛡️ Програми фонду</button>
       <button class="ai-chip" type="button" onclick="titanAsk('Як отримати податкову знижку?')">📜 Податкова</button>
       <button class="ai-chip" type="button" onclick="titanAsk('Як долучитися волонтером?')">🤝 Волонтерство</button>
     </div>
@@ -497,13 +497,13 @@
       const bMsg = document.createElement('div');
       bMsg.className = 'titan-msg-bot';
       
-      let reply = "Дякую за звернення! Наша система містить 1000 спеціалізованих модулів. Якщо ви хочете зробити донат — перейдіть на сторінку «🤝 Долучитися». Для зв'язку з живим координатором скористайтеся розділом «💬 Підтримка».";
+      let reply = "Дякую за звернення! Наш фонд зосереджений на 6 ключових програмах допомоги. Якщо ви хочете зробити донат — перейдіть на сторінку «🤝 Долучитися». Для зв'язку з живим координатором скористайтеся розділом «💬 Підтримка».";
       const lower = text.toLowerCase();
 
       if (lower.includes('калькулятор') || lower.includes('вплив') || lower.includes('конверт') || lower.includes('сума')) {
         reply = "🧮 <strong>Інтерактивний Калькулятор Впливу:</strong> На головній сторінці фонду ви можете потягнути повзунок і миттєво побачити, у які саме засоби порятунку (аптечки IFAK, турнікети, тепловізори, EcoFlow чи мобільні шпиталі) конвертується ваш донат! <br><a href='index.html#calc' style='color: #00d4ff; font-weight: 700; display: inline-block; margin-top: 6px;'>👉 Відкрити Калькулятор Впливу</a>";
-      } else if (lower.includes('500') || lower.includes('1000') || lower.includes('модул') || lower.includes('екосистем') || lower.includes('хаб') || lower.includes('кластер')) {
-        reply = "🌐 <strong>Екосистема 1000 Модулів:</strong> Наш фонд об'єднує 1000 активних напрямків у 5 кластерах (Оборона, Медицина, Спільнота, Відбудова, Майбутнє/ШІ). Ви можете відфільтрувати та знайти будь-який проєкт за лічені секунди! <br><a href='ecosystem.html' style='color: #ffb703; font-weight: 700; display: inline-block; margin-top: 6px;'>👉 Переглянути всі 1000 модулів</a>";
+      } else if (lower.includes('програм') || lower.includes('напрям') || lower.includes('модул') || lower.includes('екосистем') || lower.includes('хаб') || lower.includes('кластер')) {
+        reply = "🛡️ <strong>Ключові Програми Фонду:</strong> Ми зосереджені на 6 перевірених напрямках: Оборона (БПЛА та РЕБ), Тактична Медицина, Банк Крові, Енергетична Стійкість, Правова та Психологічна Опора, Протезування. <br><a href='ecosystem.html' style='color: #ffb703; font-weight: 700; display: inline-block; margin-top: 6px;'>👉 Переглянути всі напрямки</a>";
       } else if (lower.includes('податк') || lower.includes('знижк') || lower.includes('finanzamt') || lower.includes('501') || lower.includes('неприбутк') || lower.includes('звіт')) {
         reply = "📜 <strong>Податкові знижки та звітність:</strong> Наш фонд має офіційний неприбутковий статус (ЄДРПОУ 44859201) та партнерство в ЄС і США (501c3). Після донату напишіть на support@razom-sila.org для отримання офіційного документа для Finanzamt чи податкової! <br><a href='transparency.html' style='color: #10b981; font-weight: 700; display: inline-block; margin-top: 6px;'>👉 Прозорість і звіти</a>";
       } else if (lower.includes('волонтер') || lower.includes('долуч') || lower.includes('команда') || lower.includes('партнер')) {
@@ -661,7 +661,7 @@
             <span style="font-size: 1.8rem;">🇺🇦</span>
             <span style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; padding: 4px 12px; border-radius: 50px; font-weight: 800; font-size: 0.75rem;">ГЛОБАЛЬНИЙ КАТАЛОГ ЕКОСИСТЕМИ</span>
           </div>
-          <h2 style="color: #fff; font-size: 1.8rem; font-weight: 900; margin: 0; font-style: italic;">ВСІ 1000 МОДУЛІВ ТА РОЗДІЛІВ ФОНДУ</h2>
+          <h2 style="color: #fff; font-size: 1.8rem; font-weight: 900; margin: 0; font-style: italic;">ВСІ Ключові програми ТА РОЗДІЛІВ ФОНДУ</h2>
           <p style="color: #cbd5e1; font-size: 0.95rem; margin: 5px 0 0;">Швидкий перехід до будь-якого напрямку, зборів, звітів, інновацій та сервісів БФ «Разом ми — сила».</p>
         </div>
         <button id="megaCloseBtn" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #ef4444; padding: 10px 20px; border-radius: 12px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: all 0.2s;">✕ ЗАКРИТИ</button>
@@ -776,7 +776,7 @@
       top_status: 'ОНЛАЙН ЕКОСИСТЕМА ФОНДУ',
       top_info: '● 1000 активних напрямків • НБУ та 501(c)(3) верифікація',
       mega_btn: '🚀 ВСІ КАТЕГОРІЇ ТА МОДУЛІ (1000)',
-      mega_title: 'ВСІ 1000 МОДУЛІВ ТА РОЗДІЛІВ ФОНДУ',
+      mega_title: 'ВСІ Ключові програми ТА РОЗДІЛІВ ФОНДУ',
       mega_sub: 'Оберіть будь-який напрямок для перегляду звітів, реквізитів та подачі заявок:',
       search_placeholder: '🔍 Пошук по модулях та програмах (напр: дрон, шпитал, крипта)...',
       titan_title: 'AI-Асистент фонду',
