@@ -94,14 +94,9 @@ function setMobileLang(lang) {
 
 function renderAll() {
   renderStats();
-  renderMegaGoal();
   renderCampaigns();
-  renderFrontlineRadar();
-  renderImpactMap();
   renderGallery();
   renderHonorBoard();
-  renderPatronClub();
-  drawCertificate();
 }
 
 // === Render Stats ===
