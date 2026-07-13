@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 4. Initial Render
   renderAll();
-  initLiveTicker();
 });
 
 function updateLanguageFlagUI(lang) {
@@ -870,99 +869,13 @@ function handleFormSubmit(e) {
   e.target.reset();
   showToast(`🎉 Дякуємо, ${name}! Ваша заявка № ${app.id.slice(-6)} прийнята до обробки.`);
   
-  // Додаємо подію в живу стрічку
-  TICKER_EVENTS.unshift({
-    name: name,
-    amount: type === 'volunteer' ? 'Волонтер' : 'Партнер',
-    camp: 'Приєднався до команди!',
-    icon: '🤝'
-  });
 }
-
-// === Live Support Ticker (Social Proof) ===
-const TICKER_EVENTS = [
-  { name: 'Олександр М.', amount: '500 ₴', camp: 'на Паливо для евакуації', icon: '⛽' },
-  { name: 'Компанія "Логістик-Транс"', amount: '10 000 ₴', camp: 'Офіційний збір на пальне', icon: '🚙' },
-  { name: 'Володимир П.', amount: '200 ₴', camp: 'на Паливо для гуманітарних місій', icon: '🚗' },
-  { name: 'Ірина В.', amount: '50 €', camp: 'на Пальне для шпитального рейсу', icon: '🚑' },
-  { name: 'Денис С.', amount: '1 500 ₴', camp: 'на Ремонт евакуаційного авто', icon: '🔧' },
-  { name: 'Анонімний благодійник', amount: '5 000 ₴', camp: 'на Паливо для фронту', icon: '⛽' },
-  { name: 'Олена Т.', amount: '300 ₴', camp: 'на Бензин для волонтерів', icon: '⚡' },
-  { name: 'Марія К.', amount: '2 500 ₴', camp: 'на Гуманітарний конвой', icon: '🤝' }
-];
 
 function initLiveTicker() {
-  const tickerEl = document.getElementById('liveTicker');
-  if (!tickerEl) return;
-  
-  let eventIndex = 0;
-  
-  function showNextEvent() {
-    const ev = TICKER_EVENTS[eventIndex];
-    eventIndex = (eventIndex + 1) % TICKER_EVENTS.length;
-    
-    tickerEl.innerHTML = `
-      <div style="font-size: 1.5rem;">${ev.icon}</div>
-      <div>
-        <div style="color: #aaa; font-size: 0.76rem;">${ev.name} • <span style="color: var(--accent-gold); font-weight: 700;">+${ev.amount}</span></div>
-        <div style="color: #fff; font-size: 0.86rem; font-weight: 600;">${ev.camp}</div>
-      </div>
-    `;
-    
-    tickerEl.classList.add('show');
-    
-    setTimeout(() => {
-      tickerEl.classList.remove('show');
-    }, 5000);
-  }
-
-  setTimeout(() => {
-    showNextEvent();
-    setInterval(showNextEvent, 12000);
-  }, 4000);
+  // Вимкнено за запитом (всплывающие пополнения)
 }
-
-
-
-// Live Ticker Simulator
-const TICKER_NAMES = ['🇺🇸 Michael D.', '🇩🇪 Hans M.', '🇵🇱 Piotr K.', '🇺🇦 Олена В.', '🇫🇷 Antoine R.', '🇳🇱 Jan B.', '🇮🇹 Marco P.', '🇪🇸 Elena G.', '🇨🇭 Stefan W.', '🇸🇪 Erik N.', '🇺🇸 Jessica M.', '🇬🇧 James P.', '🇩🇪 Klaus B.', '🇨🇦 Robert H.', '🇺🇦 Тарас М.', '🇺🇦 Максим Л.', '🇵🇱 Katarzyna Z.'];
-const TICKER_AMOUNTS = ['$50', '$100', '$250', '$500', '€200', '€1,000', '£150', '$1,500', '2,000 ₴', '5,000 ₴', '10,000 ₴', '$300', '€450', '$2,500', '$750', '€600', '$1,200'];
-const TICKER_TARGETS = ['Паливо для евакуації', 'Пальне для гуманітарних місій', 'Шпитальний транспорт', 'Бензин для волонтерських авто', 'Офіційний збір на пальне', 'Ремонт евакуаційних пікапів', 'Гуманітарний конвой на Схід', 'Пальне для медиків', 'Логістика вантажів', 'Дизель для генераторів'];
 
 function initLiveTickerSimulator() {
-  const stream = document.getElementById('liveTickerStream');
-  if (!stream) return;
-
-  setInterval(() => {
-    const name = TICKER_NAMES[Math.floor(Math.random() * TICKER_NAMES.length)];
-    const amount = TICKER_AMOUNTS[Math.floor(Math.random() * TICKER_AMOUNTS.length)];
-    const target = TICKER_TARGETS[Math.floor(Math.random() * TICKER_TARGETS.length)];
-
-    const item = document.createElement('div');
-    item.className = 'live-ticker-item';
-    item.innerHTML = `
-      <span>${name}</span>
-      <span class="live-ticker-amount">${amount}</span>
-      <span>➔</span>
-      <span class="live-ticker-target">${target}</span>
-      <span class="live-ticker-time">• щойно</span>
-    `;
-
-    if (stream.firstChild) {
-      stream.insertBefore(item, stream.firstChild);
-    } else {
-      stream.appendChild(item);
-    }
-
-    if (stream.children.length > 8) {
-      stream.removeChild(stream.lastChild);
-    }
-  }, 7000);
-}
-
-if (typeof window !== 'undefined') {
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(initLiveTickerSimulator, 1500);
-  });
+  // Вимкнено за запитом
 }
 
