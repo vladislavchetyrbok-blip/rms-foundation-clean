@@ -224,6 +224,7 @@ function renderCampaigns() {
         </div>
 
         <div>
+          ${(camp.target && camp.collected && !camp.hideProgress) ? `
           <div class="progress-wrap">
             <div class="progress-stats">
               <span>${collLbl} <strong style="color: var(--accent-gold);">${Number(camp.collected).toLocaleString()} ₴</strong></span>
@@ -233,10 +234,16 @@ function renderCampaigns() {
               <div class="progress-bar-fill" style="width: ${percent}%;"></div>
             </div>
           </div>
+          ` : ''}
 
-          <button class="btn btn-primary" style="width: 100%;" onclick="openModalForCamp('${camp.id}')">
-            <span>⚡ ${btnLbl} (Monobank)</span>
-          </button>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: ${(!camp.target || camp.hideProgress) ? '14px' : '0'};">
+            <button class="btn btn-primary" style="flex: 1; min-width: 200px; padding: 14px 18px; font-size: 0.95rem;" onclick="openModalForCamp('${camp.id}')">
+              <span>⚡ ${btnLbl} (Monobank)</span>
+            </button>
+            <button class="btn" style="flex: 1; min-width: 200px; padding: 14px 18px; font-size: 0.95rem; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; border-radius: 35px; font-weight: 800; box-shadow: 0 6px 20px rgba(37,99,235,0.4);" onclick="simulateDonate('WayForPay')">
+              <span>🌐 WayForPay (Картка/Apple Pay)</span>
+            </button>
+          </div>
         </div>
       </div>
     `;
@@ -514,11 +521,18 @@ function simulateDonate(method) {
     showToast('⏳ Перехід на офіційну Банку Monobank...');
     return;
   }
+  if (method === 'WayForPay') {
+    const camps = FoundationStore.getCampaigns();
+    const wUrl = (camps.length > 0 && camps[0].wayforpayUrl) ? camps[0].wayforpayUrl : window.WAYFORPAY_URL || 'https://secure.wayforpay.com/donate';
+    window.open(wUrl, '_blank');
+    closeModal();
+    showToast('⏳ Перехід до захищеного шлюзу WayForPay...');
+    return;
+  }
   showToast(`⏳ Перехід до захищеного шлюзу ${method}...`);
   setTimeout(() => {
-    // Символічно поповнюємо перший активний збір на 500 грн для наочної демонстрації роботи даних
     const camps = FoundationStore.getCampaigns();
-    if (camps.length > 0) {
+    if (camps.length > 0 && camps[0].target && !camps[0].hideProgress) {
       FoundationStore.updateCampaignAmount(camps[0].id, 500);
     }
     closeModal();

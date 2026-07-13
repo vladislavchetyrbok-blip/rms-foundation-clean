@@ -4,7 +4,7 @@
  * Синхронізує публічний сайт та Адмін-панель через localStorage.
  */
 
-const STORAGE_KEY = 'rms_foundation_data_monobank_clean_v2';
+const STORAGE_KEY = 'rms_foundation_data_monobank_clean_v3';
 const ONLINE_BIN_ID = '6a4708aef5f4af5e2957274f';
 const ONLINE_API_KEY = '$2a$10$a.w5fqFGgNDtxm.14mCh3us9zVhiSRK7fng26ppAnKWesY1g.noMe';
 const ASSET_FALLBACKS = {
@@ -43,28 +43,30 @@ const INITIAL_DATA = {
   },
   campaigns: [
     {
-      id: 'monobank_camp_1',
+      id: 'fuel_monobank_1',
       title: {
-        uk: '🎯 Головний збір на Monobank: 5 нічних дронів Mavic 3T, системи РЕБ та тактична медицина',
-        en: '🎯 Main Monobank Fundraiser: 5 Night-Vision Mavic 3T Drones, EW systems & Tactical Medicine',
-        pl: '🎯 Główna zbiórka Monobank: 5 dronów noktowizyjnych Mavic 3T, systemy WRE i medycyna taktyczna',
-        ro: '🎯 Colectare principală Monobank: 5 drone Mavic 3T, sisteme EW și medicină tactică',
-        it: '🎯 Raccolta fondi principale Monobank: 5 droni Mavic 3T, sistemi EW e medicina tattica',
-        de: '🎯 Hauptspendenaktion Monobank: 5 Mavic 3T Drohnen, EloKa-Systeme & Taktische Medizin'
+        uk: '⛽ Офіційний збір на паливо для евакуаційних та гуманітарних місій (Monobank)',
+        en: '⛽ Official Monobank Fundraiser for Fuel: Evacuation & Humanitarian Missions',
+        pl: '⛽ Oficjalna zbiórka Monobank na paliwo do misji ewakuacyjnych i humanitarnych',
+        ro: '⛽ Colectare oficială Monobank pentru combustibil: Misiuni de evacuare și umanitare',
+        it: '⛽ Raccolta ufficiale Monobank per carburante: Missioni di evacuazione e logistica',
+        de: '⛽ Offizielle Monobank-Spendenaktion für Treibstoff: Evakuierungs- und humanitäre Fahrten'
       },
       desc: {
-        uk: 'Офіційна монобанка фонду для комплексного забезпечення передових підрозділів ЗСУ: закупівля квадрокоптерів із тепловізійною оптикою для нічної розвідки, мобільних куполів РЕБ для захисту від ворожих FPV-дронів та сертифікованих кровоспинних турнікетів CAT 7-ї генерації.',
-        en: 'Official Monobank jar for comprehensive frontline support: purchasing night reconnaissance thermal drones, portable anti-FPV EW domes, and certified CAT 7th gen tourniquets for military medics.',
-        pl: 'Oficjalna skarbonka Monobank do kompleksowego wsparcia frontu: drony termowizyjne, kopuły WRE i stazy taktyczne CAT 7.',
-        ro: 'Cont oficial Monobank pentru suport pe linia întâi: drone termice de recunoaștere, sisteme portabile EW și garouri CAT 7.',
-        it: 'Raccolta ufficiale Monobank per il supporto in prima linea: droni termici notturni, cupole EW anti-FPV e lacci emostatici CAT 7.',
-        de: 'Offizielle Monobank-Spendenaktion für die Front: Wärmebilddrohnen für die Nachtaufklärung, mobile EloKa-Kugeln und CAT 7 Tourniquets.'
+        uk: 'Офіційна монобанка фонду для безперебійного забезпечення паливом. Щодня наші волонтерські екіпажі здійснюють виїзди у прифронтові зони: евакуюють поранених та цивільних, доставляють ліки, продуктові набори й засоби життєзабезпечення у шпиталі. Кожна ваша гривня безпосередньо перетворюється на кілометри врятованих життів!',
+        en: 'Official Monobank jar for fuel supply. Every day our volunteer transport crews conduct missions to frontline zones: evacuating civilians and wounded, delivering medicine, food, and vital supplies to hospitals. Every contribution directly fuels lifesaving logistics!',
+        pl: 'Oficjalna skarbonka Monobank na paliwo. Codziennie wolontariusze docierają do stref przyfrontowych, ewakuując rannych i dostarczając leki do szpitali.',
+        ro: 'Cont oficial Monobank pentru combustibil. Zilnic, echipajele noastre voluntare efectuează misiuni în zonele din linia întâi pentru evacuarea răniților și livrarea de medicamente.',
+        it: 'Raccolta ufficiale Monobank per il carburante. Ogni giorno i nostri equipaggi volontari effettuano missioni nelle zone di prima linea per evacuare i feriti e consegnare medicine.',
+        de: 'Offizielle Monobank-Spendenaktion für Treibstoff zur Unterstützung täglicher Evakuierungs- und humanitärer Logistikmissionen an der Front.'
       },
-      target: 1000000,
-      collected: 684500,
-      category: 'drones',
-      icon: '⚡',
+      target: null,
+      collected: null,
+      hideProgress: true,
+      category: 'auto',
+      icon: '⛽',
       jarUrl: 'https://send.monobank.ua/jar/6iL3oH5Vde',
+      wayforpayUrl: 'https://secure.wayforpay.com/donate',
       cardNum: '4874 1000 3862 9211',
       urgent: true,
       image: 'drone.png'

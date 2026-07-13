@@ -192,13 +192,6 @@
         <p class="section-subtitle" data-i18n="camp_subtitle">Кожна гривня, євро чи долар рятують життя просто зараз. Приєднуйтесь до закриття найкритичніших потреб.</p>
       </div>
 
-      <div class="camp-filters" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 28px;">
-        <button class="camp-filter-btn active" onclick="filterCampaigns('all', this)" data-i18n="camp_filter_all">🔥 Всі збори</button>
-        <button class="camp-filter-btn" onclick="filterCampaigns('drones', this)" data-i18n="camp_filter_drones">🛸 Дрони та РЕБ</button>
-        <button class="camp-filter-btn" onclick="filterCampaigns('med', this)" data-i18n="camp_filter_med">🏥 Тактична медицина</button>
-        <button class="camp-filter-btn" onclick="filterCampaigns('auto', this)" data-i18n="camp_filter_auto">🚗 Автотранспорт</button>
-      </div>
-
       <div class="campaigns-grid" id="campaignsContainer">
         <!-- Dynamically Rendered by script.js -->
       </div>
@@ -236,13 +229,6 @@
       <div class="section-header">
         <h2 class="section-title" data-i18n="honor_title">🌟 Дошка пошани фонду</h2>
         <p class="section-subtitle" data-i18n="honor_subtitle">Ми безмежно вдячні кожному меценату, корпоративному донору та невтомному волонтеру, які наближають спільну перемогу та допомагають людям.</p>
-      </div>
-
-      <div class="honor-filters">
-        <button class="honor-filter-btn active" onclick="filterHonor('all', this)" data-i18n="honor_filter_all">Всі герої</button>
-        <button class="honor-filter-btn" onclick="filterHonor('corporate', this)" data-i18n="honor_filter_corporate">Меценати та бізнес</button>
-        <button class="honor-filter-btn" onclick="filterHonor('donor', this)" data-i18n="honor_filter_donor">Благодійники</button>
-        <button class="honor-filter-btn" onclick="filterHonor('volunteer', this)" data-i18n="honor_filter_volunteer">Волонтери-координатори</button>
       </div>
 
       <div class="honor-grid" id="honorContainer">
@@ -292,39 +278,6 @@
           <div>
             <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 8px;" data-i18n="focus_rehab_title">🦾 Реабілітація та протезування</h3>
             <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="focus_rehab_desc">Організація лікування, виготовлення біонічних протезів та психоемоційне відновлення ветеранів.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Transparency & Reports -->
-  <section class="section" id="reports" style="background: rgba(13, 24, 50, 0.4);">
-    <div class="container">
-      <div class="transparency-box">
-        <div>
-          <h2 class="section-title" style="margin-bottom: 16px;" data-i18n="trans_title">100% прозорість та звітність</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 24px;" data-i18n="trans_subtitle">Ми публікуємо щомісячні фінансові звіти, акти прийому-передачі, фото та відеофіксацію кожної закупівлі.</p>
-          <button class="btn btn-outline" onclick="showToast('Завантаження повного звіту у форматі PDF...')">
-            <span data-i18n="trans_btn_dl">Завантажити звіт 📄</span>
-          </button>
-        </div>
-
-        <div>
-          <div class="report-item">
-            <div>
-              <h4 style="font-size: 1.05rem; margin-bottom: 4px;" data-i18n="trans_rep_1_title">Фінансовий звіт за II квартал 2026</h4>
-              <span style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="trans_rep_1_size">PDF, 4.2 MB • Опубліковано 1 липня</span>
-            </div>
-            <span style="font-size: 1.5rem; cursor: pointer;" onclick="showToast('Звіт завантажено!')">📥</span>
-          </div>
-
-          <div class="report-item">
-            <div>
-              <h4 style="font-size: 1.05rem; margin-bottom: 4px;" data-i18n="trans_rep_2_title">Звіт про передачу аеророзвідці (30 дронів)</h4>
-              <span style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="trans_rep_2_size">PDF + Фотозвіт, 12.8 MB</span>
-            </div>
-            <span style="font-size: 1.5rem; cursor: pointer;" onclick="showToast('Звіт завантажено!')">📥</span>
           </div>
         </div>
       </div>
@@ -467,8 +420,11 @@
       <div id="modalTabCard">
         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;" data-i18n="modal_card_info">Натисніть кнопку нижче для переходу до захищеного шлюзу або банки:</p>
         <div style="display: flex; flex-direction: column; gap: 12px;">
-          <button class="btn" style="background: #e11d48; color: #fff; width: 100%;" onclick="simulateDonate('Monobank')">
+          <button class="btn" style="background: #e11d48; color: #fff; width: 100%; font-size: 1.05rem;" onclick="simulateDonate('Monobank')">
             <span data-i18n="modal_btn_monobank">🐈 Поповнити Банку Monobank</span>
+          </button>
+          <button class="btn" style="background: #2563eb; color: #fff; width: 100%; font-size: 1.05rem; font-weight: 800; box-shadow: 0 4px 15px rgba(37,99,235,0.4);" onclick="simulateDonate('WayForPay')">
+            <span data-i18n="modal_btn_wayforpay">🌐 Підтримати через WayForPay (Картка/Apple Pay/Google Pay)</span>
           </button>
           <button class="btn" style="background: #16a34a; color: #fff; width: 100%;" onclick="simulateDonate('Privat24')">
             <span data-i18n="modal_btn_privat">🟢 Оплатити через Приват24 / LiqPay</span>
