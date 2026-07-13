@@ -274,11 +274,7 @@ function renderHonorBoard() {
       </div>
       <h3 class="honor-name">${item.name}</h3>
       <div class="honor-role">${item.role}</div>
-      <p class="honor-desc">${item.desc || ''}</p>
-      <div class="honor-contrib">
-        <span>${contribLbl}</span>
-        <span class="honor-contrib-val">${item.contribution}</span>
-      </div>
+      <p class="honor-desc" style="margin-top: 8px;">${item.desc || ''}</p>
     </div>
   `).join('');
 }
@@ -515,25 +511,31 @@ function showModalTab(tabId) {
 }
 
 function simulateDonate(method) {
+  const camps = window.FoundationStore ? window.FoundationStore.getCampaigns() : [];
   if (method === 'Monobank') {
-    window.open('https://send.monobank.ua/jar/6iL3oH5Vde', '_blank');
+    const mUrl = (camps.length > 0 && camps[0].jarUrl) ? camps[0].jarUrl : 'https://send.monobank.ua/jar/6iL3oH5Vde';
+    window.open(mUrl, '_blank');
     closeModal();
-    showToast('⏳ Перехід на офіційну Банку Monobank...');
+    showToast('🐱 Відкриваємо офіційну Банку Monobank...');
     return;
   }
   if (method === 'WayForPay') {
-    const camps = FoundationStore.getCampaigns();
     const wUrl = (camps.length > 0 && camps[0].wayforpayUrl) ? camps[0].wayforpayUrl : window.WAYFORPAY_URL || 'https://secure.wayforpay.com/donate';
     window.open(wUrl, '_blank');
     closeModal();
-    showToast('⏳ Перехід до захищеного шлюзу WayForPay...');
+    showToast('🌐 Відкриваємо захищений шлюз WayForPay (Картка/Apple Pay/Google Pay)...');
+    return;
+  }
+  if (method === 'Privat24' || method === 'LiqPay') {
+    window.open('https://www.privat24.ua', '_blank');
+    closeModal();
+    showToast('🟢 Переходимо на офіційний портал Приват24...');
     return;
   }
   showToast(`⏳ Перехід до захищеного шлюзу ${method}...`);
   setTimeout(() => {
-    const camps = FoundationStore.getCampaigns();
     if (camps.length > 0 && camps[0].target && !camps[0].hideProgress) {
-      FoundationStore.updateCampaignAmount(camps[0].id, 500);
+      window.FoundationStore.updateCampaignAmount(camps[0].id, 500);
     }
     closeModal();
     showToast('❤️ Дякуємо за ваш внесок! Дані збору оновлено.');
@@ -863,22 +865,30 @@ function handleFormSubmit(e) {
   const type = document.getElementById('appType').value;
   const message = document.getElementById('appMsg').value;
 
-  FoundationStore.addApplication({ name, phone, email, type, message });
+  const app = window.FoundationStore.addApplication({ name, phone, email, type, message });
 
   e.target.reset();
-  showToast('🚀 Вашу заявку успішно надіслано! Перевірте в Адмінці.');
+  showToast(`🎉 Дякуємо, ${name}! Ваша заявка № ${app.id.slice(-6)} прийнята до обробки.`);
+  
+  // Додаємо подію в живу стрічку
+  TICKER_EVENTS.unshift({
+    name: name,
+    amount: type === 'volunteer' ? 'Волонтер' : 'Партнер',
+    camp: 'Приєднався до команди!',
+    icon: '🤝'
+  });
 }
 
 // === Live Support Ticker (Social Proof) ===
 const TICKER_EVENTS = [
-  { name: 'Олександр М.', amount: '500 ₴', camp: 'на Дрони Mavic 3T', icon: '🛸' },
-  { name: 'Марія К.', amount: '1 000 ₴', camp: 'на Тактичну медицину', icon: '🏥' },
-  { name: 'Володимир П.', amount: '200 ₴', camp: 'на Паливо для евакуацій', icon: '🚗' },
-  { name: 'Ірина В.', amount: '50 €', camp: 'на Аптечки IFAK', icon: '🩸' },
-  { name: 'Денис С.', amount: '1 500 ₴', camp: 'на Ремонт пікапа', icon: '🔧' },
-  { name: 'Анонімний благодійник', amount: '5 000 ₴', camp: 'на Нічні дрони', icon: '🌙' },
-  { name: 'Олена Т.', amount: '300 ₴', camp: 'на Хімічні грілки', icon: '⚡' },
-  { name: 'Компанія "Техно-Вектор"', amount: '10 000 ₴', camp: 'на Окопний РЕБ', icon: '🛡️' }
+  { name: 'Олександр М.', amount: '500 ₴', camp: 'на Паливо для евакуації', icon: '⛽' },
+  { name: 'Компанія "Логістик-Транс"', amount: '10 000 ₴', camp: 'Офіційний збір на пальне', icon: '🚙' },
+  { name: 'Володимир П.', amount: '200 ₴', camp: 'на Паливо для гуманітарних місій', icon: '🚗' },
+  { name: 'Ірина В.', amount: '50 €', camp: 'на Пальне для шпитального рейсу', icon: '🚑' },
+  { name: 'Денис С.', amount: '1 500 ₴', camp: 'на Ремонт евакуаційного авто', icon: '🔧' },
+  { name: 'Анонімний благодійник', amount: '5 000 ₴', camp: 'на Паливо для фронту', icon: '⛽' },
+  { name: 'Олена Т.', amount: '300 ₴', camp: 'на Бензин для волонтерів', icon: '⚡' },
+  { name: 'Марія К.', amount: '2 500 ₴', camp: 'на Гуманітарний конвой', icon: '🤝' }
 ];
 
 function initLiveTicker() {
@@ -915,9 +925,9 @@ function initLiveTicker() {
 
 
 // Live Ticker Simulator
-const TICKER_NAMES = ['🇺🇸 Michael D.', '🇩🇪 Hans M.', '🇯🇵 Kenji S.', '🇬🇧 Sarah W.', '🇨🇦 David L.', '🇵🇱 Piotr K.', '🇺🇦 Олена В.', '🇫🇷 Antoine R.', '🇦🇺 Marcus T.', '🇳🇱 Jan B.', '🇮🇹 Marco P.', '🇪🇸 Elena G.', '🇨🇭 Stefan W.', '🇸🇪 Erik N.', '🇳🇴 Astrid K.', '🇺🇸 Jessica M.', '🇬🇧 James P.', '🇩🇪 Klaus B.', '🇨🇦 Robert H.', '🇺🇦 Тарас М.'];
-const TICKER_AMOUNTS = ['$50', '$100', '$250', '$500', '€200', '€1,000', '£150', '0.5 ETH', '1.2 ETH', '$1,500', '2,000 ₴', '5,000 ₴', '10,000 ₴', '$300', '€450', '$2,500', '0.8 ETH', '$750', '€600', '$1,200'];
-const TICKER_TARGETS = ['Нічна FPV-розвідка', 'Підземні школи', 'Квантовий зв\'язок', 'Екзоскелети', 'Окопний РЕБ', 'Аптечки IFAK', 'Снайперська оптика', 'Морські дрони', 'Ветеранські СТО', 'Роботи-міношукачі', 'Сонячні дахи', 'Біонічні протези', 'Очищення річок', 'Мобільні лазні', 'IT-стипендії сиріт', 'Куполи РЕБ', 'Мобільна стоматологія', 'Зенітні турелі', 'ШІ-аналіз знімків', 'Агро-дрони'];
+const TICKER_NAMES = ['🇺🇸 Michael D.', '🇩🇪 Hans M.', '🇵🇱 Piotr K.', '🇺🇦 Олена В.', '🇫🇷 Antoine R.', '🇳🇱 Jan B.', '🇮🇹 Marco P.', '🇪🇸 Elena G.', '🇨🇭 Stefan W.', '🇸🇪 Erik N.', '🇺🇸 Jessica M.', '🇬🇧 James P.', '🇩🇪 Klaus B.', '🇨🇦 Robert H.', '🇺🇦 Тарас М.', '🇺🇦 Максим Л.', '🇵🇱 Katarzyna Z.'];
+const TICKER_AMOUNTS = ['$50', '$100', '$250', '$500', '€200', '€1,000', '£150', '$1,500', '2,000 ₴', '5,000 ₴', '10,000 ₴', '$300', '€450', '$2,500', '$750', '€600', '$1,200'];
+const TICKER_TARGETS = ['Паливо для евакуації', 'Пальне для гуманітарних місій', 'Шпитальний транспорт', 'Бензин для волонтерських авто', 'Офіційний збір на пальне', 'Ремонт евакуаційних пікапів', 'Гуманітарний конвой на Схід', 'Пальне для медиків', 'Логістика вантажів', 'Дизель для генераторів'];
 
 function initLiveTickerSimulator() {
   const stream = document.getElementById('liveTickerStream');

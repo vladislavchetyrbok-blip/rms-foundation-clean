@@ -266,7 +266,6 @@ function renderHonorTable(honorBoard) {
         </td>
         <td style="font-weight: 600;">${h.name}</td>
         <td style="color: var(--text-muted);">${h.role}</td>
-        <td style="color: var(--admin-accent); font-weight: 600;">${h.contribution || '—'}</td>
         <td><span style="background: rgba(255,183,3,0.15); color: #ffb703; padding: 4px 10px; border-radius: 10px; font-size: 0.8rem;">${h.badge || '⭐️'}</span></td>
         <td style="text-align: right; white-space: nowrap;">
           <button class="btn-admin btn-edit" onclick="editHonor('${h.id}')">✏️</button>
@@ -282,7 +281,6 @@ function openHonorModal() {
   document.getElementById('editHonorId').value = '';
   document.getElementById('honorInputName').value = '';
   document.getElementById('honorInputRole').value = '';
-  document.getElementById('honorInputContribution').value = '';
   document.getElementById('honorInputImg').value = 'honor_patron.jpg';
   document.getElementById('honorInputBadge').value = '⭐️ Герой фронту';
   document.getElementById('honorModal').style.display = 'flex';
@@ -297,7 +295,6 @@ function editHonor(id) {
   document.getElementById('editHonorId').value = h.id;
   document.getElementById('honorInputName').value = h.name || '';
   document.getElementById('honorInputRole').value = h.role || '';
-  document.getElementById('honorInputContribution').value = h.contribution || '';
   document.getElementById('honorInputImg').value = h.image || 'honor_patron.jpg';
   document.getElementById('honorInputBadge').value = h.badge || '';
   document.getElementById('honorModal').style.display = 'flex';
@@ -307,7 +304,6 @@ function saveHonorForm() {
   const id = document.getElementById('editHonorId').value.trim() || ('hb_' + Math.floor(1000 + Math.random() * 9000));
   const name = document.getElementById('honorInputName').value.trim();
   const role = document.getElementById('honorInputRole').value.trim();
-  const contribution = document.getElementById('honorInputContribution').value.trim();
   const image = document.getElementById('honorInputImg').value.trim() || 'honor_patron.jpg';
   const badge = document.getElementById('honorInputBadge').value.trim() || '⭐️';
 
@@ -327,7 +323,6 @@ function saveHonorForm() {
 
   h.name = name;
   h.role = role;
-  h.contribution = contribution;
   h.image = image;
   h.badge = badge;
 

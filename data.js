@@ -123,7 +123,6 @@ const INITIAL_DATA = {
       id: 'hb_patron',
       name: 'Володимир Петренко',
       role: 'Почесний президент та меценат',
-      contribution: '2 500 000 ₴',
       category: 'donor',
       badge: 'Стратегічний партнер',
       badgeClass: 'badge-gold',
@@ -135,7 +134,6 @@ const INITIAL_DATA = {
       id: 'hb_driver',
       name: 'Андрій «Скіф» Бондаренко',
       role: 'Волонтер-водій передової логістики',
-      contribution: '64 рейси на нуль',
       category: 'volunteer',
       badge: 'Гордість нації',
       badgeClass: 'badge-purple',
@@ -147,7 +145,6 @@ const INITIAL_DATA = {
       id: 'hb_defender',
       name: 'Володимир «Херсон»',
       role: 'Командир підрозділу, Захисник України',
-      contribution: 'Захист Південного напрямку',
       category: 'volunteer',
       badge: 'Герой передової',
       badgeClass: 'badge-gold',
@@ -159,7 +156,6 @@ const INITIAL_DATA = {
       id: 'hb_coordinator',
       name: 'Олександр Мельник',
       role: 'Стратегічний партнер та меценат',
-      contribution: '1 200 000 ₴',
       category: 'donor',
       badge: 'Почесний меценат',
       badgeClass: 'badge-blue',
@@ -171,7 +167,6 @@ const INITIAL_DATA = {
       id: 'hb_media',
       name: 'Олена Коваленко',
       role: 'Керівниця складу та фоторепортерка',
-      contribution: '15 000+ боксів',
       category: 'volunteer',
       badge: 'Серце фонду',
       badgeClass: 'badge-purple',
@@ -183,7 +178,6 @@ const INITIAL_DATA = {
       id: 'hb_cargo',
       name: 'Максим Ковальчук',
       role: 'Координатор вантажних конвоїв',
-      contribution: '180 тонн вантажів',
       category: 'volunteer',
       badge: 'Залізний волонтер',
       badgeClass: 'badge-purple',
@@ -195,7 +189,6 @@ const INITIAL_DATA = {
       id: 'hb_logistics',
       name: 'Дмитро Ткаченко',
       role: 'Куратор продовольчих програм',
-      contribution: '12 000+ наборів',
       category: 'volunteer',
       badge: 'Герой тилу',
       badgeClass: 'badge-blue',
@@ -684,6 +677,9 @@ window.FoundationStore = {
     app.id = 'app_' + Date.now();
     app.date = new Date().toLocaleString('uk-UA');
     app.status = 'new';
+    app.role = app.role || app.type || 'Волонтер/Партнер';
+    app.notes = app.notes || app.message || '';
+    app.message = app.notes;
     if (!data.applications) data.applications = [];
     data.applications.unshift(app);
     this.saveData(data);
